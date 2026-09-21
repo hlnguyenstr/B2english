@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lớp B2 — Học tiếng Anh trình độ B2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEF1F6; --card:#FFFFFF; --ink:#16233B; --muted:#5B6B85; --line:#D8DEE9;
+  --hi:#FFE566; --hi-soft:#FFF0A8; --red:#C2413A; --green:#1E7A5B; --blue:#2A4FD8;
+  --sans:"Be Vietnam Pro", system-ui, "Segoe UI", sans-serif;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --shadow:0 1px 0 var(--line);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1622; --card:#17202E; --ink:#E7ECF4; --muted:#93A1B8; --line:#27313F;
+    --hi:rgba(255,229,102,.32); --hi-soft:rgba(255,229,102,.16);
+    --red:#F0897F; --green:#5FD0A6; --blue:#93ABFF;
+    --shadow:0 1px 0 var(--line);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1622; --card:#17202E; --ink:#E7ECF4; --muted:#93A1B8; --line:#27313F;
+  --hi:rgba(255,229,102,.32); --hi-soft:rgba(255,229,102,.16);
+  --red:#F0897F; --green:#5FD0A6; --blue:#93ABFF;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+:where(a){color:inherit}
+:focus-visible{outline:2.5px solid var(--blue); outline-offset:2px; border-radius:2px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important; transition:none!important}}
+
+/* ---------- shell ---------- */
+.shell{display:grid; grid-template-columns:232px minmax(0,1fr); min-height:100vh}
+.rail{
+  border-right:1px solid var(--line); padding:20px 14px 40px;
+  position:sticky; top:0; height:100vh; overflow:auto; background:var(--card);
+}
+.brand{display:flex; gap:10px; align-items:baseline; padding:0 8px 18px}
+.brand b{font-weight:800; font-size:20px; letter-spacing:-.02em}
+.brand span{font-size:12px; color:var(--muted)}
+.navbtn{
+  display:flex; gap:10px; align-items:center; width:100%; text-align:left;
+  background:none; border:0; border-radius:7px; padding:9px 10px; margin-bottom:2px;
+  font:inherit; font-weight:600; font-size:14.5px; color:var(--ink); cursor:pointer;
+}
+.navbtn:hover{background:var(--paper)}
+.navbtn[aria-current="page"]{background:var(--hi-soft)}
+.navbtn[aria-current="page"] .ico{transform:none}
+.ico{width:22px; text-align:center; font-size:15px}
+.railfoot{margin-top:22px; padding:12px 10px 0; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted)}
+main{padding:34px 30px 90px; max-width:860px}
+.tabbar{display:none}
+
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:static; height:auto; border-right:0; border-bottom:1px solid var(--line); padding:14px}
+  .rail .navlist, .railfoot{display:none}
+  main{padding:20px 16px 96px}
+  .tabbar{
+    display:grid; grid-template-columns:repeat(8,1fr); position:fixed; bottom:0; left:0; right:0;
+    background:var(--card); border-top:1px solid var(--line); z-index:20;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .tabbar button{background:none;border:0;font:inherit;color:var(--muted);padding:8px 1px 10px;font-size:9.5px;font-weight:600;cursor:pointer;display:grid;gap:3px;justify-items:center}
+  .tabbar button[aria-current="page"]{color:var(--ink)}
+  .tabbar button i{font-style:normal;font-size:16px}
+}
+
+/* ---------- type ---------- */
+h1{font-size:31px; line-height:1.15; letter-spacing:-.025em; font-weight:800; margin:0 0 6px}
+h2{font-size:21px; letter-spacing:-.015em; font-weight:800; margin:34px 0 10px}
+h3{font-size:16px; font-weight:800; margin:20px 0 6px}
+.lede{color:var(--muted); margin:0 0 26px; max-width:60ch}
+.en{font-family:var(--serif)}
+.ipa{font-family:var(--serif); font-style:italic; color:var(--muted)}
+.hl{background-image:linear-gradient(transparent 58%, var(--hi) 58%, var(--hi) 94%, transparent 94%)}
+.pen{color:var(--red)}
+.ok{color:var(--green)}
+small,.small{font-size:13px; color:var(--muted)}
+
+/* ---------- bits ---------- */
+.card{background:var(--card); border:1px solid var(--line); border-radius:11px; padding:18px}
+.stack>*+*{margin-top:12px}
+.row{display:flex; gap:9px; flex-wrap:wrap; align-items:center}
+.spread{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap}
+button.btn{
+  font:inherit; font-weight:600; font-size:14.5px; cursor:pointer;
+  border-radius:6px; padding:9px 15px; border:1px solid var(--ink);
+  background:var(--ink); color:var(--card);
+}
+button.btn.ghost{background:transparent; color:var(--ink); border-color:var(--line)}
+button.btn.ghost:hover{border-color:var(--ink)}
+button.btn:disabled{opacity:.45; cursor:not-allowed}
+button.btn.sm{padding:6px 11px; font-size:13px; border-radius:5px}
+.chip{
+  display:inline-flex; gap:6px; align-items:center; border:1px solid var(--line);
+  border-radius:3px; padding:3px 9px; font-size:12.5px; font-weight:600; background:var(--card);
+}
+.chip.on{background:var(--hi-soft); border-color:transparent}
+.chip.btn{cursor:pointer; font-family:inherit}
+.bar{height:7px; background:var(--paper); border:1px solid var(--line); border-radius:99px; overflow:hidden}
+.bar i{display:block; height:100%; background:var(--ink)}
+.grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:12px}
+.stat{border:1px solid var(--line); border-radius:9px; padding:13px 14px; background:var(--card)}
+.stat b{display:block; font-size:26px; letter-spacing:-.02em; line-height:1.1}
+.stat span{font-size:12.5px; color:var(--muted)}
+input[type=text],textarea,select{
+  font:inherit; color:var(--ink); background:var(--card);
+  border:1px solid var(--line); border-radius:6px; padding:9px 11px; width:100%;
+}
+textarea{resize:vertical}
+.speak{
+  border:1px solid var(--line); background:var(--card); color:var(--ink);
+  border-radius:50%; width:34px; height:34px; cursor:pointer; font-size:15px; line-height:1;
+}
+.speak:hover{border-color:var(--ink)}
+
+/* ---------- home hero ---------- */
+.hero{padding:6px 0 4px}
+.wotd{font-family:var(--serif); font-size:46px; line-height:1.05; font-weight:600; letter-spacing:-.02em; display:inline-block; padding:0 4px}
+.wotd-wrap{position:relative; display:inline-block; margin:10px 0 6px}
+.wotd-wrap::before{
+  content:""; position:absolute; inset:16% -8px 8% -8px; background:var(--hi);
+  transform:rotate(-1.2deg); border-radius:2px; z-index:0;
+}
+.wotd-wrap .wotd{position:relative; z-index:1}
+
+/* ---------- flashcard ---------- */
+.flash{min-height:250px; display:grid; place-items:center; text-align:center; padding:28px 20px}
+.flash .word{font-family:var(--serif); font-size:38px; font-weight:600; letter-spacing:-.02em; line-height:1.15}
+.flash .vi{font-size:20px; font-weight:600; margin-top:12px}
+.flash .ex{font-family:var(--serif); font-size:16.5px; margin-top:14px; max-width:46ch}
+
+/* ---------- lists ---------- */
+.tlist{border:1px solid var(--line); border-radius:11px; overflow:hidden; background:var(--card)}
+.titem{display:block; width:100%; text-align:left; background:none; border:0; border-bottom:1px solid var(--line); padding:14px 16px; font:inherit; cursor:pointer; color:inherit}
+.titem:last-child{border-bottom:0}
+.titem:hover{background:var(--hi-soft)}
+.titem b{display:block; font-weight:600; font-size:15.5px}
+.titem span{font-size:13px; color:var(--muted)}
+
+/* ---------- content blocks ---------- */
+.note{border-left:3px solid var(--hi); background:var(--hi-soft); padding:10px 14px; border-radius:0 7px 7px 0}
+.exbox{border:1px solid var(--line); border-radius:9px; padding:14px; background:var(--card)}
+.exbox+.exbox{margin-top:10px}
+.nitem{border:1px solid var(--line); border-radius:9px; padding:12px 14px; background:var(--card); margin-bottom:9px}
+.nitem.new{border-left:3px solid var(--hi)}
+.tools{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; margin-bottom:12px}
+.empty{border:1px dashed var(--line); border-radius:9px; padding:26px 18px; text-align:center; color:var(--muted)}
+details>summary{cursor:pointer; font-weight:600; font-size:14.5px}
+.q{font-weight:600; margin-bottom:9px}
+.opt{display:block; width:100%; text-align:left; font:inherit; background:var(--card); color:inherit;
+  border:1px solid var(--line); border-radius:7px; padding:10px 13px; margin-bottom:7px; cursor:pointer}
+.opt:hover{border-color:var(--ink)}
+.opt.right{border-color:var(--green); background:color-mix(in srgb, var(--green) 10%, transparent)}
+.opt.wrong{border-color:var(--red); background:color-mix(in srgb, var(--red) 10%, transparent)}
+.fb{margin-top:9px; font-size:14px}
+.passage{font-family:var(--serif); font-size:17.5px; line-height:1.72; max-width:66ch}
+.passage p{margin:0 0 15px}
+table.gtab{border-collapse:collapse; width:100%; font-size:14.5px; margin:10px 0}
+table.gtab td,table.gtab th{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top}
+table.gtab th{background:var(--paper); font-weight:600}
+.ruled{
+  font-family:var(--serif); font-size:17px; line-height:30px; min-height:330px;
+  background-image:repeating-linear-gradient(var(--card) 0 29px, var(--line) 29px 30px);
+  background-attachment:local; padding:6px 12px; border-radius:7px;
+}
+.diffw{padding:0 1px; border-radius:2px}
+.diffw.bad{color:var(--red); text-decoration:underline wavy var(--red); text-underline-offset:3px}
+.diffw.miss{color:var(--red); background:color-mix(in srgb, var(--red) 12%, transparent)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><b>Lớp B2</b><span>tiếng Anh, mỗi ngày một ít</span></div>
+    <div class="navlist" id="navlist"></div>
+    <div class="railfoot">
+      <div id="railStreak"></div>
+      <button class="btn ghost sm" id="themeBtn" style="margin-top:10px">Đổi nền sáng/tối</button>
+      <button class="btn ghost sm" id="resetBtn" style="margin-top:6px">Xoá tiến độ</button>
+    </div>
+  </aside>
+  <main id="view" tabindex="-1"></main>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="Điều hướng"></nav>
+
+<script>
+/* =========================================================
+   DỮ LIỆU HỌC TẬP
+   ========================================================= */
+const VOCAB = [
+{d:"core",w:"accomplish",ipa:"/əˈkʌm.plɪʃ/",p:"v",vi:"hoàn thành, đạt được",ex:"She accomplished more in six months than most people manage in two years.",exvi:"Cô ấy đạt được nhiều thứ trong sáu tháng hơn hầu hết mọi người làm trong hai năm."},
+{d:"core",w:"adequate",ipa:"/ˈæd.ə.kwət/",p:"adj",vi:"đủ, thoả đáng (vừa đủ, không hơn)",ex:"The training was adequate, but it could have been far better.",exvi:"Khoá đào tạo ở mức tạm đủ, nhưng lẽ ra có thể tốt hơn nhiều."},
+{d:"core",w:"alleviate",ipa:"/əˈliː.vi.eɪt/",p:"v",vi:"làm dịu, giảm bớt (đau, khó khăn)",ex:"The new bus route has done little to alleviate traffic in the city centre.",exvi:"Tuyến buýt mới gần như không giảm được ùn tắc ở trung tâm."},
+{d:"core",w:"ambiguous",ipa:"/æmˈbɪɡ.ju.əs/",p:"adj",vi:"mơ hồ, có thể hiểu nhiều nghĩa",ex:"His answer was deliberately ambiguous, so nobody knew where he stood.",exvi:"Câu trả lời của anh ta cố tình mơ hồ nên không ai biết anh ta đứng về phía nào."},
+{d:"core",w:"anticipate",ipa:"/ænˈtɪs.ɪ.peɪt/",p:"v",vi:"dự đoán, lường trước",ex:"We had not anticipated such a sharp rise in costs.",exvi:"Chúng tôi đã không lường trước chi phí tăng mạnh như vậy."},
+{d:"core",w:"assess",ipa:"/əˈses/",p:"v",vi:"đánh giá, thẩm định",ex:"It is still too early to assess the impact of the policy.",exvi:"Vẫn còn quá sớm để đánh giá tác động của chính sách."},
+{d:"core",w:"beneficial",ipa:"/ˌben.ɪˈfɪʃ.əl/",p:"adj",vi:"có lợi",ex:"Regular exercise is beneficial to both body and mind.",exvi:"Tập luyện đều đặn có lợi cho cả thể chất lẫn tinh thần."},
+{d:"core",w:"compelling",ipa:"/kəmˈpel.ɪŋ/",p:"adj",vi:"thuyết phục; cuốn hút",ex:"There is no compelling reason to change the system now.",exvi:"Không có lý do thuyết phục nào để thay đổi hệ thống lúc này."},
+{d:"core",w:"comprehensive",ipa:"/ˌkɒm.prɪˈhen.sɪv/",p:"adj",vi:"toàn diện, bao quát",ex:"The report offers a comprehensive account of what went wrong.",exvi:"Bản báo cáo trình bày toàn diện những gì đã sai sót."},
+{d:"core",w:"consequence",ipa:"/ˈkɒn.sɪ.kwəns/",p:"n",vi:"hậu quả, hệ quả",ex:"Nobody was prepared for the long-term consequences of the decision.",exvi:"Không ai chuẩn bị cho hệ quả lâu dài của quyết định đó."},
+{d:"core",w:"considerable",ipa:"/kənˈsɪd.ər.ə.bəl/",p:"adj",vi:"đáng kể, khá lớn",ex:"The project required a considerable amount of time and money.",exvi:"Dự án đòi hỏi lượng thời gian và tiền bạc đáng kể."},
+{d:"core",w:"constraint",ipa:"/kənˈstreɪnt/",p:"n",vi:"ràng buộc, hạn chế",ex:"Time constraints forced us to simplify the design.",exvi:"Ràng buộc về thời gian buộc chúng tôi phải đơn giản hoá thiết kế."},
+{d:"core",w:"controversial",ipa:"/ˌkɒn.trəˈvɜː.ʃəl/",p:"adj",vi:"gây tranh cãi",ex:"The decision to close the factory remains highly controversial.",exvi:"Quyết định đóng cửa nhà máy vẫn gây tranh cãi gay gắt."},
+{d:"core",w:"crucial",ipa:"/ˈkruː.ʃəl/",p:"adj",vi:"mấu chốt, cực kỳ quan trọng",ex:"The first two minutes of a presentation are crucial.",exvi:"Hai phút đầu của một bài thuyết trình là mấu chốt."},
+{d:"core",w:"deteriorate",ipa:"/dɪˈtɪə.ri.ə.reɪt/",p:"v",vi:"xấu đi, suy giảm",ex:"Her health deteriorated rapidly over the winter.",exvi:"Sức khoẻ của bà ấy xấu đi nhanh chóng trong mùa đông."},
+{d:"core",w:"diminish",ipa:"/dɪˈmɪn.ɪʃ/",p:"v",vi:"giảm đi, làm giảm",ex:"Interest in the sport has diminished considerably since the 1990s.",exvi:"Sự quan tâm đến môn thể thao này đã giảm đáng kể từ thập niên 1990."},
+{d:"core",w:"distinguish",ipa:"/dɪˈstɪŋ.ɡwɪʃ/",p:"v",vi:"phân biệt",ex:"Learners often struggle to distinguish between these two sounds.",exvi:"Người học thường khó phân biệt hai âm này."},
+{d:"core",w:"diverse",ipa:"/daɪˈvɜːs/",p:"adj",vi:"đa dạng",ex:"The team is far more diverse than it was a decade ago.",exvi:"Đội ngũ đa dạng hơn nhiều so với mười năm trước."},
+{d:"core",w:"eligible",ipa:"/ˈel.ɪ.dʒə.bəl/",p:"adj",vi:"đủ điều kiện, hợp lệ",ex:"You are only eligible for the discount if you book before June.",exvi:"Bạn chỉ đủ điều kiện nhận giảm giá nếu đặt trước tháng Sáu."},
+{d:"core",w:"emerge",ipa:"/ɪˈmɜːdʒ/",p:"v",vi:"xuất hiện, lộ ra",ex:"New evidence has emerged that contradicts the original account.",exvi:"Bằng chứng mới đã xuất hiện, mâu thuẫn với lời kể ban đầu."},
+{d:"core",w:"enhance",ipa:"/ɪnˈhɑːns/",p:"v",vi:"nâng cao, cải thiện",ex:"Subtitles can enhance listening comprehension if used carefully.",exvi:"Phụ đề có thể cải thiện kỹ năng nghe hiểu nếu dùng đúng cách."},
+{d:"core",w:"evident",ipa:"/ˈev.ɪ.dənt/",p:"adj",vi:"rõ ràng, hiển nhiên",ex:"It soon became evident that the plan would not work.",exvi:"Chẳng bao lâu, rõ ràng là kế hoạch sẽ không hiệu quả."},
+{d:"core",w:"exceed",ipa:"/ɪkˈsiːd/",p:"v",vi:"vượt quá",ex:"Demand has exceeded our expectations by a wide margin.",exvi:"Nhu cầu đã vượt xa dự kiến của chúng tôi."},
+{d:"core",w:"facilitate",ipa:"/fəˈsɪl.ɪ.teɪt/",p:"v",vi:"tạo điều kiện, hỗ trợ cho",ex:"The app is designed to facilitate communication between doctors and patients.",exvi:"Ứng dụng được thiết kế để tạo thuận lợi cho giao tiếp giữa bác sĩ và bệnh nhân."},
+{d:"core",w:"feasible",ipa:"/ˈfiː.zə.bəl/",p:"adj",vi:"khả thi",ex:"Finishing by Friday is simply not feasible.",exvi:"Hoàn thành trước thứ Sáu đơn giản là không khả thi."},
+{d:"core",w:"fluctuate",ipa:"/ˈflʌk.tʃu.eɪt/",p:"v",vi:"dao động, lên xuống thất thường",ex:"Prices fluctuate sharply depending on the season.",exvi:"Giá dao động mạnh tuỳ theo mùa."},
+{d:"core",w:"fundamental",ipa:"/ˌfʌn.dəˈmen.təl/",p:"adj",vi:"cơ bản, nền tảng",ex:"There is a fundamental difference between the two approaches.",exvi:"Có một khác biệt cơ bản giữa hai cách tiếp cận."},
+{d:"core",w:"implement",ipa:"/ˈɪm.plɪ.ment/",p:"v",vi:"triển khai, thực thi",ex:"The new rules will be implemented in stages.",exvi:"Các quy định mới sẽ được triển khai theo từng giai đoạn."},
+{d:"core",w:"implication",ipa:"/ˌɪm.plɪˈkeɪ.ʃən/",p:"n",vi:"hàm ý; hệ quả kéo theo",ex:"Few people have considered the financial implications of the proposal.",exvi:"Ít người cân nhắc các hệ quả tài chính của đề xuất này."},
+{d:"core",w:"inevitable",ipa:"/ɪˈnev.ɪ.tə.bəl/",p:"adj",vi:"không thể tránh khỏi",ex:"Some disagreement is inevitable in a team this size.",exvi:"Bất đồng là điều không tránh khỏi trong một đội quy mô như vậy."},
+{d:"core",w:"initiative",ipa:"/ɪˈnɪʃ.ə.tɪv/",p:"n",vi:"sáng kiến; sự chủ động",ex:"He took the initiative and rewrote the whole proposal.",exvi:"Anh ấy chủ động viết lại toàn bộ đề xuất."},
+{d:"core",w:"integrate",ipa:"/ˈɪn.tɪ.ɡreɪt/",p:"v",vi:"tích hợp; hoà nhập",ex:"The software integrates easily with the tools we already use.",exvi:"Phần mềm tích hợp dễ dàng với các công cụ chúng tôi đang dùng."},
+{d:"core",w:"justify",ipa:"/ˈdʒʌs.tɪ.faɪ/",p:"v",vi:"biện minh, chứng minh là hợp lý",ex:"How do you justify spending so much on advertising?",exvi:"Bạn biện minh thế nào cho việc chi quá nhiều vào quảng cáo?"},
+{d:"core",w:"negligible",ipa:"/ˈneɡ.lɪ.dʒə.bəl/",p:"adj",vi:"không đáng kể",ex:"The difference in quality was negligible.",exvi:"Khác biệt về chất lượng là không đáng kể."},
+{d:"core",w:"obstacle",ipa:"/ˈɒb.stə.kəl/",p:"n",vi:"trở ngại",ex:"The main obstacle to progress is a shortage of funding.",exvi:"Trở ngại chính cho tiến độ là thiếu kinh phí."},
+{d:"core",w:"ongoing",ipa:"/ˈɒnˌɡəʊ.ɪŋ/",p:"adj",vi:"đang diễn ra, liên tục",ex:"The investigation is ongoing, so we cannot comment.",exvi:"Cuộc điều tra đang diễn ra nên chúng tôi không thể bình luận."},
+{d:"core",w:"outcome",ipa:"/ˈaʊt.kʌm/",p:"n",vi:"kết quả (cuối cùng)",ex:"Nobody could have predicted the outcome of the election.",exvi:"Không ai có thể dự đoán kết quả của cuộc bầu cử."},
+{d:"core",w:"overwhelming",ipa:"/ˌəʊ.vəˈwel.mɪŋ/",p:"adj",vi:"áp đảo; choáng ngợp",ex:"The response from readers was overwhelming.",exvi:"Phản hồi từ độc giả nhiều đến mức choáng ngợp."},
+{d:"core",w:"perceive",ipa:"/pəˈsiːv/",p:"v",vi:"nhận thức, cảm nhận",ex:"The brand is widely perceived as expensive but reliable.",exvi:"Thương hiệu này được nhiều người xem là đắt nhưng đáng tin cậy."},
+{d:"core",w:"persistent",ipa:"/pəˈsɪs.tənt/",p:"adj",vi:"dai dẳng; kiên trì",ex:"A persistent cough should always be checked by a doctor.",exvi:"Ho dai dẳng thì luôn nên đi khám bác sĩ."},
+{d:"core",w:"plausible",ipa:"/ˈplɔː.zə.bəl/",p:"adj",vi:"nghe có lý, hợp lý bề ngoài",ex:"It is a plausible explanation, though we cannot prove it.",exvi:"Đó là một lời giải thích nghe có lý, dù chúng ta không chứng minh được."},
+{d:"core",w:"prejudice",ipa:"/ˈpredʒ.ə.dɪs/",p:"n",vi:"định kiến",ex:"The campaign aims to challenge prejudice against older workers.",exvi:"Chiến dịch nhằm phản bác định kiến với người lao động lớn tuổi."},
+{d:"core",w:"prominent",ipa:"/ˈprɒm.ɪ.nənt/",p:"adj",vi:"nổi bật, có tiếng",ex:"She played a prominent role in the negotiations.",exvi:"Bà ấy đóng vai trò nổi bật trong các cuộc đàm phán."},
+{d:"core",w:"reluctant",ipa:"/rɪˈlʌk.tənt/",p:"adj",vi:"miễn cưỡng, ngại",ex:"Many staff were reluctant to raise the issue with management.",exvi:"Nhiều nhân viên ngại nêu vấn đề này với ban quản lý."},
+{d:"core",w:"resilient",ipa:"/rɪˈzɪl.i.ənt/",p:"adj",vi:"kiên cường, phục hồi nhanh",ex:"Small businesses proved surprisingly resilient during the downturn.",exvi:"Doanh nghiệp nhỏ tỏ ra kiên cường đáng ngạc nhiên trong giai đoạn suy thoái."},
+{d:"core",w:"restrict",ipa:"/rɪˈstrɪkt/",p:"v",vi:"hạn chế, giới hạn",ex:"Access to the building is restricted to staff.",exvi:"Việc vào toà nhà chỉ giới hạn cho nhân viên."},
+{d:"core",w:"reveal",ipa:"/rɪˈviːl/",p:"v",vi:"tiết lộ, cho thấy",ex:"The survey revealed a surprising level of dissatisfaction.",exvi:"Khảo sát cho thấy mức độ bất mãn đáng ngạc nhiên."},
+{d:"core",w:"rigorous",ipa:"/ˈrɪɡ.ər.əs/",p:"adj",vi:"nghiêm ngặt, chặt chẽ",ex:"The drug went through rigorous testing before approval.",exvi:"Loại thuốc này trải qua thử nghiệm nghiêm ngặt trước khi được phê duyệt."},
+{d:"core",w:"scarce",ipa:"/skeəs/",p:"adj",vi:"khan hiếm",ex:"Clean water is becoming scarce in parts of the region.",exvi:"Nước sạch đang trở nên khan hiếm ở một số nơi trong khu vực."},
+{d:"core",w:"significant",ipa:"/sɪɡˈnɪf.ɪ.kənt/",p:"adj",vi:"đáng kể, quan trọng",ex:"There has been a significant improvement in air quality.",exvi:"Chất lượng không khí đã cải thiện đáng kể."},
+{d:"core",w:"subsequent",ipa:"/ˈsʌb.sɪ.kwənt/",p:"adj",vi:"sau đó, tiếp theo",ex:"The error was corrected in subsequent editions.",exvi:"Lỗi này đã được sửa trong các lần xuất bản sau."},
+{d:"core",w:"substantial",ipa:"/səbˈstæn.ʃəl/",p:"adj",vi:"đáng kể, lớn (về lượng)",ex:"They received a substantial grant from the government.",exvi:"Họ nhận được một khoản tài trợ lớn từ chính phủ."},
+{d:"core",w:"sustain",ipa:"/səˈsteɪn/",p:"v",vi:"duy trì; chịu đựng",ex:"It is hard to sustain that level of concentration for three hours.",exvi:"Rất khó duy trì mức độ tập trung đó trong ba tiếng."},
+{d:"core",w:"thorough",ipa:"/ˈθʌr.ə/",p:"adj",vi:"kỹ lưỡng",ex:"They carried out a thorough review of the safety procedures.",exvi:"Họ tiến hành rà soát kỹ lưỡng các quy trình an toàn."},
+{d:"core",w:"transition",ipa:"/trænˈzɪʃ.ən/",p:"n",vi:"sự chuyển tiếp",ex:"The transition from university to full-time work can be difficult.",exvi:"Việc chuyển từ đại học sang đi làm toàn thời gian có thể khó khăn."},
+{d:"core",w:"undermine",ipa:"/ˌʌn.dəˈmaɪn/",p:"v",vi:"làm suy yếu, phá hoại ngầm",ex:"Constant criticism can undermine a child's confidence.",exvi:"Chỉ trích liên tục có thể làm suy yếu sự tự tin của trẻ."},
+{d:"core",w:"versatile",ipa:"/ˈvɜː.sə.taɪl/",p:"adj",vi:"đa năng, linh hoạt",ex:"Eggs are one of the most versatile ingredients in the kitchen.",exvi:"Trứng là một trong những nguyên liệu đa năng nhất trong bếp."},
+{d:"core",w:"viable",ipa:"/ˈvaɪ.ə.bəl/",p:"adj",vi:"khả thi, có thể tồn tại được",ex:"Cycling is a viable alternative for short journeys.",exvi:"Đi xe đạp là một lựa chọn khả thi cho quãng đường ngắn."},
+{d:"core",w:"widespread",ipa:"/ˈwaɪd.spred/",p:"adj",vi:"lan rộng, phổ biến",ex:"There is widespread agreement that the system needs reform.",exvi:"Có sự đồng thuận rộng rãi rằng hệ thống cần cải cách."},
+{d:"core",w:"setback",ipa:"/ˈset.bæk/",p:"n",vi:"trở ngại, bước lùi tạm thời",ex:"The delay was a serious setback for the whole team.",exvi:"Việc trì hoãn là một bước lùi nghiêm trọng với cả đội."},
+{d:"core",w:"drawback",ipa:"/ˈdrɔː.bæk/",p:"n",vi:"nhược điểm",ex:"The main drawback of the job is the commute.",exvi:"Nhược điểm chính của công việc này là quãng đường đi làm."},
+
+{d:"phrasal",w:"put up with",ipa:"/ˌpʊt ˈʌp wɪð/",p:"phr v",vi:"chịu đựng, cam chịu",ex:"I don't know how she puts up with the noise.",exvi:"Tôi không hiểu sao cô ấy chịu được tiếng ồn đó."},
+{d:"phrasal",w:"come up with",ipa:"/ˌkʌm ˈʌp wɪð/",p:"phr v",vi:"nghĩ ra (ý tưởng, giải pháp)",ex:"We need to come up with a better title.",exvi:"Chúng ta cần nghĩ ra một tiêu đề hay hơn."},
+{d:"phrasal",w:"carry out",ipa:"/ˌkær.i ˈaʊt/",p:"phr v",vi:"tiến hành, thực hiện",ex:"The council carried out a survey of local residents.",exvi:"Hội đồng đã tiến hành khảo sát cư dân địa phương."},
+{d:"phrasal",w:"turn out",ipa:"/ˌtɜːn ˈaʊt/",p:"phr v",vi:"hoá ra là",ex:"It turned out that we had been given the wrong address.",exvi:"Hoá ra chúng tôi đã được cho sai địa chỉ."},
+{d:"phrasal",w:"look into",ipa:"/ˈlʊk ˌɪn.tuː/",p:"phr v",vi:"xem xét, điều tra",ex:"I'll look into the problem and get back to you.",exvi:"Tôi sẽ xem xét vấn đề rồi phản hồi lại bạn."},
+{d:"phrasal",w:"bring about",ipa:"/ˌbrɪŋ əˈbaʊt/",p:"phr v",vi:"gây ra, dẫn tới (thay đổi)",ex:"The strike brought about a change in policy.",exvi:"Cuộc đình công dẫn tới một thay đổi trong chính sách."},
+{d:"phrasal",w:"cut down on",ipa:"/ˌkʌt ˈdaʊn ɒn/",p:"phr v",vi:"cắt giảm",ex:"He's trying to cut down on sugar.",exvi:"Anh ấy đang cố cắt giảm đường."},
+{d:"phrasal",w:"get around to",ipa:"/ɡet əˈraʊnd tuː/",p:"phr v",vi:"rốt cuộc cũng bắt tay làm",ex:"I never got around to reading the manual.",exvi:"Rốt cuộc tôi vẫn chưa đọc quyển hướng dẫn."},
+{d:"phrasal",w:"take on",ipa:"/ˌteɪk ˈɒn/",p:"phr v",vi:"nhận thêm (việc); tuyển dụng",ex:"She has taken on far too much work this term.",exvi:"Kỳ này cô ấy nhận quá nhiều việc."},
+{d:"phrasal",w:"put off",ipa:"/ˌpʊt ˈɒf/",p:"phr v",vi:"hoãn lại; làm mất hứng",ex:"They put the meeting off until Thursday.",exvi:"Họ hoãn cuộc họp tới thứ Năm."},
+{d:"phrasal",w:"work out",ipa:"/ˌwɜːk ˈaʊt/",p:"phr v",vi:"tính ra; diễn ra suôn sẻ",ex:"I can't work out why the file won't open.",exvi:"Tôi không hiểu nổi tại sao tệp không mở được."},
+{d:"phrasal",w:"rule out",ipa:"/ˌruːl ˈaʊt/",p:"phr v",vi:"loại trừ khả năng",ex:"The police have not ruled out the possibility of an accident.",exvi:"Cảnh sát chưa loại trừ khả năng đây là tai nạn."},
+{d:"phrasal",w:"catch up on",ipa:"/ˌkætʃ ˈʌp ɒn/",p:"phr v",vi:"làm bù, theo kịp (việc tồn đọng)",ex:"I spent Sunday catching up on emails.",exvi:"Tôi dành cả Chủ nhật để giải quyết bù đống email."},
+{d:"phrasal",w:"back up",ipa:"/ˌbæk ˈʌp/",p:"phr v",vi:"ủng hộ; sao lưu",ex:"Can you back up that claim with evidence?",exvi:"Bạn có bằng chứng nào chứng minh cho khẳng định đó không?"},
+{d:"phrasal",w:"point out",ipa:"/ˌpɔɪnt ˈaʊt/",p:"phr v",vi:"chỉ ra, lưu ý rằng",ex:"She pointed out that the deadline had already passed.",exvi:"Cô ấy chỉ ra rằng hạn chót đã qua."},
+{d:"phrasal",w:"come across",ipa:"/ˌkʌm əˈkrɒs/",p:"phr v",vi:"tình cờ gặp; gây ấn tượng là",ex:"He comes across as confident, but he isn't.",exvi:"Anh ấy tạo cảm giác tự tin, nhưng thực ra không phải vậy."},
+{d:"phrasal",w:"set up",ipa:"/ˌset ˈʌp/",p:"phr v",vi:"thành lập, thiết lập",ex:"They set up the company in a garage.",exvi:"Họ lập công ty ngay trong một cái ga-ra."},
+{d:"phrasal",w:"give in",ipa:"/ˌɡɪv ˈɪn/",p:"phr v",vi:"nhượng bộ, chịu thua",ex:"After hours of argument, he finally gave in.",exvi:"Sau nhiều giờ tranh luận, cuối cùng anh ấy nhượng bộ."},
+
+{d:"colloc",w:"make a decision",ipa:"/meɪk ə dɪˈsɪʒ.ən/",p:"collocation",vi:"đưa ra quyết định (không dùng 'do')",ex:"We have to make a decision by Friday at the latest.",exvi:"Chúng ta phải đưa ra quyết định chậm nhất là thứ Sáu."},
+{d:"colloc",w:"take responsibility for",ipa:"/teɪk rɪˌspɒn.sɪˈbɪl.ə.ti fɔː/",p:"collocation",vi:"chịu trách nhiệm về",ex:"No one was willing to take responsibility for the mistake.",exvi:"Không ai sẵn lòng chịu trách nhiệm về sai sót đó."},
+{d:"colloc",w:"raise awareness of",ipa:"/reɪz əˈweə.nəs ɒv/",p:"collocation",vi:"nâng cao nhận thức về",ex:"The campaign raised awareness of online fraud.",exvi:"Chiến dịch nâng cao nhận thức về lừa đảo trực tuyến."},
+{d:"colloc",w:"meet a deadline",ipa:"/miːt ə ˈded.laɪn/",p:"collocation",vi:"kịp hạn chót",ex:"We met the deadline, but only just.",exvi:"Chúng tôi kịp hạn, nhưng chỉ vừa sát nút."},
+{d:"colloc",w:"draw a conclusion",ipa:"/drɔː ə kənˈkluː.ʒən/",p:"collocation",vi:"rút ra kết luận",ex:"It would be unwise to draw a conclusion from a single study.",exvi:"Sẽ là thiếu khôn ngoan nếu rút ra kết luận từ một nghiên cứu duy nhất."},
+{d:"colloc",w:"play a key role in",ipa:"/pleɪ ə kiː rəʊl ɪn/",p:"collocation",vi:"đóng vai trò then chốt trong",ex:"Sleep plays a key role in memory.",exvi:"Giấc ngủ đóng vai trò then chốt với trí nhớ."},
+{d:"colloc",w:"pay attention to",ipa:"/peɪ əˈten.ʃən tuː/",p:"collocation",vi:"chú ý tới",ex:"Pay close attention to the word order here.",exvi:"Hãy chú ý kỹ đến trật tự từ ở đây."},
+{d:"colloc",w:"have a significant impact on",ipa:"/hæv ə sɪɡˈnɪf.ɪ.kənt ˈɪm.pækt ɒn/",p:"collocation",vi:"có tác động đáng kể đến",ex:"Fuel prices have a significant impact on food costs.",exvi:"Giá nhiên liệu có tác động đáng kể tới giá thực phẩm."},
+{d:"colloc",w:"bear in mind",ipa:"/beər ɪn ˈmaɪnd/",p:"collocation",vi:"lưu ý, ghi nhớ rằng",ex:"Bear in mind that the office closes at four.",exvi:"Hãy nhớ rằng văn phòng đóng cửa lúc bốn giờ."},
+{d:"colloc",w:"strike a balance between",ipa:"/straɪk ə ˈbæl.əns bɪˈtwiːn/",p:"collocation",vi:"cân bằng giữa",ex:"It is hard to strike a balance between speed and accuracy.",exvi:"Rất khó cân bằng giữa tốc độ và độ chính xác."},
+{d:"colloc",w:"reach an agreement",ipa:"/riːtʃ ən əˈɡriː.mənt/",p:"collocation",vi:"đạt được thoả thuận",ex:"The two sides reached an agreement after six months.",exvi:"Hai bên đạt được thoả thuận sau sáu tháng."},
+{d:"colloc",w:"take into account",ipa:"/teɪk ˈɪn.tuː əˈkaʊnt/",p:"collocation",vi:"tính đến, xét đến",ex:"The figures do not take inflation into account.",exvi:"Các con số này chưa tính đến lạm phát."},
+{d:"colloc",w:"make progress",ipa:"/meɪk ˈprəʊ.ɡres/",p:"collocation",vi:"tiến bộ",ex:"You'll make faster progress if you study a little every day.",exvi:"Bạn sẽ tiến bộ nhanh hơn nếu học một chút mỗi ngày."},
+{d:"colloc",w:"pose a threat to",ipa:"/pəʊz ə θret tuː/",p:"collocation",vi:"đặt ra mối đe doạ cho",ex:"Rising sea levels pose a serious threat to coastal cities.",exvi:"Mực nước biển dâng đặt ra mối đe doạ nghiêm trọng cho các thành phố ven biển."}
+];
+
+const GRAMMAR = [
+{id:"perfect", t:"Present Perfect vs Past Simple vs Present Perfect Continuous",
+ sub:"Chọn đúng thì khi nói về quá khứ có liên hệ hiện tại",
+ html:`<p><b>Past Simple</b> — hành động đã kết thúc, gắn với <i>thời điểm quá khứ xác định</i>: <span class="en">I <span class="hl">saw</span> her yesterday.</span></p>
+ <p><b>Present Perfect</b> — quá khứ <i>không xác định thời điểm</i>, nhưng có <i>kết quả/liên hệ ở hiện tại</i>: <span class="en">I <span class="hl">have lost</span> my keys.</span> (⇒ bây giờ vẫn chưa tìm thấy)</p>
+ <p><b>Present Perfect Continuous</b> — nhấn mạnh <i>quá trình kéo dài</i> tới hiện tại, hoặc kết quả nhìn thấy được của quá trình đó: <span class="en">I <span class="hl">have been waiting</span> for an hour.</span></p>
+ <table class="gtab"><tr><th>Dấu hiệu</th><th>Thì dùng</th></tr>
+ <tr><td>yesterday, last week, in 2019, ago, when I was…</td><td>Past Simple</td></tr>
+ <tr><td>ever, never, just, already, yet, so far, recently, this week</td><td>Present Perfect</td></tr>
+ <tr><td>for, since + nhấn mạnh sự kéo dài / How long…?</td><td>Present Perfect Continuous</td></tr></table>
+ <p class="note">Động từ trạng thái (<span class="en">know, be, believe, own, understand</span>) thường <b>không</b> dùng ở dạng tiếp diễn: <span class="en">I <span class="hl">have known</span> him for years.</span> (không dùng <span class="pen">have been knowing</span>)</p>`,
+ ex:[
+ {q:"I ____ (not / see) Mai since we left school.", a:["haven't seen","have not seen"]},
+ {q:"She's exhausted — she ____ (work) in the garden all morning.", a:["has been working","'s been working"]},
+ {q:"We ____ (move) to Da Nang in 2019 and we love it here.", a:["moved"]},
+ {q:"How long ____ you ____ (learn) English? — About six years.", a:["have been learning","have you been learning"], hint:"Điền đủ: have … been learning"}]},
+
+{id:"pastperf", t:"Past Perfect & Past Perfect Continuous",
+ sub:"Quá khứ của quá khứ",
+ html:`<p><b>Past Perfect</b> (<span class="en">had + V3</span>) diễn tả hành động xảy ra <i>trước</i> một mốc quá khứ khác:</p>
+ <p class="en">When we arrived, the film <span class="hl">had already started</span>.</p>
+ <p><b>Past Perfect Continuous</b> (<span class="en">had been + V-ing</span>) nhấn mạnh quá trình kéo dài trước mốc đó:</p>
+ <p class="en">She <span class="hl">had been driving</span> for six hours before she stopped for a rest.</p>
+ <p>Nếu hai hành động xảy ra <i>theo trình tự rõ ràng</i> với <span class="en">after / before / then</span>, ta thường dùng Past Simple cho cả hai: <span class="en">He finished the report and then went home.</span></p>
+ <p class="note">Bẫy thường gặp: sau <span class="en">by the time</span> + quá khứ, mệnh đề chính hầu như luôn dùng Past Perfect. <span class="en">By the time the guests arrived, she <b>had cooked</b> everything.</span></p>`,
+ ex:[
+ {q:"By the time I got to the station, the train ____ (leave).", a:["had left"]},
+ {q:"They were tired because they ____ (travel) all night.", a:["had been travelling","had been traveling"]},
+ {q:"I didn't recognise her — I ____ (never / meet) her before.", a:["had never met"]},
+ {q:"After he ____ (check) the figures, he sent the email.", a:["had checked","checked"]}]},
+
+{id:"cond", t:"Câu điều kiện loại 2, loại 3 và hỗn hợp",
+ sub:"Giả định trái thực tế ở hiện tại và quá khứ",
+ html:`<table class="gtab">
+ <tr><th>Loại</th><th>Cấu trúc</th><th>Ví dụ</th></tr>
+ <tr><td>2 — trái thực tế ở hiện tại</td><td>If + V2/V-ed, would + V</td><td class="en">If I had more time, I would read more.</td></tr>
+ <tr><td>3 — trái thực tế ở quá khứ</td><td>If + had + V3, would have + V3</td><td class="en">If she had studied, she would have passed.</td></tr>
+ <tr><td>Hỗn hợp: quá khứ → hiện tại</td><td>If + had + V3, would + V</td><td class="en">If I had taken that job, I would be in Ha Noi now.</td></tr>
+ <tr><td>Hỗn hợp: hiện tại → quá khứ</td><td>If + V2/V-ed, would have + V3</td><td class="en">If he weren't so shy, he would have spoken up.</td></tr></table>
+ <p>Ở loại 2, dùng <span class="en">were</span> cho mọi ngôi trong văn viết trang trọng: <span class="en">If I <span class="hl">were</span> you, I'd apologise.</span></p>
+ <p>Thay <span class="en">would</span> bằng <span class="en">might / could</span> khi muốn giảm mức chắc chắn: <span class="en">If we left now, we <b>might</b> catch the 7:15.</span></p>
+ <p class="note">Đảo ngữ trang trọng (bỏ <span class="en">if</span>): <span class="en"><b>Had</b> I known about the delay, I would have called you.</span></p>`,
+ ex:[
+ {q:"If I ____ (be) you, I'd take the earlier flight.", a:["were","was"]},
+ {q:"If they had booked sooner, they ____ (get) a cheaper room.", a:["would have got","would have gotten"]},
+ {q:"If she hadn't missed the interview, she ____ (work) here now.", a:["would be working","would work"]},
+ {q:"____ we known the risk, we would never have signed. (đảo ngữ)", a:["had"]}]},
+
+{id:"wish", t:"Wish / If only / would rather",
+ sub:"Diễn đạt tiếc nuối và mong muốn",
+ html:`<table class="gtab">
+ <tr><th>Muốn nói gì</th><th>Cấu trúc</th><th>Ví dụ</th></tr>
+ <tr><td>Tiếc về hiện tại</td><td>wish + V2/V-ed</td><td class="en">I wish I spoke Japanese.</td></tr>
+ <tr><td>Tiếc về quá khứ</td><td>wish + had + V3</td><td class="en">I wish I had applied earlier.</td></tr>
+ <tr><td>Phàn nàn, muốn người khác đổi</td><td>wish + would + V</td><td class="en">I wish you would stop interrupting.</td></tr>
+ <tr><td>Muốn ai làm gì</td><td>would rather + S + V2/V-ed</td><td class="en">I'd rather you didn't tell her.</td></tr>
+ <tr><td>Muốn tự mình làm gì</td><td>would rather + V (nguyên mẫu)</td><td class="en">I'd rather stay in tonight.</td></tr></table>
+ <p><span class="en">If only</span> dùng giống <span class="en">wish</span> nhưng nhấn mạnh hơn: <span class="en">If only I <b>had listened</b> to you!</span></p>
+ <p class="note">Không dùng <span class="en">wish … would</span> cho chính mình: <span class="pen">I wish I would be taller.</span> → <span class="en ok">I wish I were taller.</span></p>`,
+ ex:[
+ {q:"I wish I ____ (not / say) that to him yesterday.", a:["hadn't said","had not said"]},
+ {q:"If only it ____ (stop) raining — we can't go out.", a:["would stop"]},
+ {q:"I'd rather you ____ (not / smoke) in here.", a:["didn't smoke","did not smoke"]},
+ {q:"She wishes she ____ (have) more free time at the weekend.", a:["had"]}]},
+
+{id:"passive", t:"Bị động nâng cao & thể sai khiến",
+ sub:"Passive reporting, have/get something done",
+ html:`<p><b>Bị động với động từ tường thuật</b> — dùng khi nguồn tin không xác định hoặc muốn giữ khách quan:</p>
+ <p class="en">It <span class="hl">is believed that</span> the factory will close. = The factory <span class="hl">is believed to close</span>.</p>
+ <p class="en">He <span class="hl">is thought to have left</span> the country. (hành động xảy ra trước ⇒ to have + V3)</p>
+ <p>Các động từ thường gặp: <span class="en">say, think, believe, report, know, expect, allege, consider</span>.</p>
+ <p><b>Causative</b> — ai đó làm hộ ta:</p>
+ <table class="gtab">
+ <tr><td class="en">have something done</td><td>trang trọng, trung tính</td><td class="en">I had my laptop repaired.</td></tr>
+ <tr><td class="en">get something done</td><td>thân mật hơn</td><td class="en">We got the walls painted.</td></tr>
+ <tr><td class="en">have somebody do</td><td>sai khiến trực tiếp</td><td class="en">She had her assistant book the tickets.</td></tr>
+ <tr><td class="en">get somebody to do</td><td>thuyết phục ai làm</td><td class="en">I got my brother to help me.</td></tr></table>
+ <p class="note">Dùng <span class="en">have something done</span> cả khi gặp chuyện không may: <span class="en">He <b>had</b> his phone <b>stolen</b> on the bus.</span></p>`,
+ ex:[
+ {q:"People say that he is very wealthy. → He ____ to be very wealthy.", a:["is said"]},
+ {q:"They believe the thief escaped through the window. → The thief ____ to have escaped through the window.", a:["is believed"]},
+ {q:"I'm going to ____ (have / my hair / cut) tomorrow.", a:["have my hair cut"]},
+ {q:"We ____ (get) the report translated last week.", a:["got"]}]},
+
+{id:"reported", t:"Câu tường thuật (Reported speech)",
+ sub:"Lùi thì, đổi đại từ, động từ tường thuật",
+ html:`<p>Khi động từ tường thuật ở quá khứ, thì trong câu thường <b>lùi một bậc</b>:</p>
+ <table class="gtab"><tr><th>Trực tiếp</th><th>Tường thuật</th></tr>
+ <tr><td class="en">"I <b>am</b> tired."</td><td class="en">He said he <b>was</b> tired.</td></tr>
+ <tr><td class="en">"I <b>saw</b> it."</td><td class="en">She said she <b>had seen</b> it.</td></tr>
+ <tr><td class="en">"I <b>will</b> call."</td><td class="en">He said he <b>would</b> call.</td></tr>
+ <tr><td class="en">"I <b>can</b> swim."</td><td class="en">She said she <b>could</b> swim.</td></tr></table>
+ <p>Đổi trạng từ: <span class="en">now → then, today → that day, tomorrow → the next day, yesterday → the day before, here → there, this → that</span>.</p>
+ <p><b>Động từ tường thuật ở B2</b> — biết dùng các động từ này quan trọng hơn là lùi thì:</p>
+ <table class="gtab">
+ <tr><td class="en">offer / promise / refuse / agree + to V</td><td class="en">He offered to drive me home.</td></tr>
+ <tr><td class="en">advise / remind / warn + sb + to V</td><td class="en">She warned me not to touch it.</td></tr>
+ <tr><td class="en">admit / deny / suggest + V-ing</td><td class="en">He denied taking the money.</td></tr>
+ <tr><td class="en">insist / suggest + (that) + S + V</td><td class="en">She insisted that he apologise.</td></tr>
+ <tr><td class="en">apologise for / accuse sb of + V-ing</td><td class="en">They accused him of cheating.</td></tr></table>
+ <p class="note">Không lùi thì nếu điều được nói vẫn đúng ở hiện tại: <span class="en">She told me the office <b>opens</b> at eight.</span></p>`,
+ ex:[
+ {q:'"I\'ll send it tomorrow," he said. → He said he ____ send it the next day.', a:["would"]},
+ {q:'"Don\'t leave the door open," she told me. → She told me ____ leave the door open.', a:["not to"]},
+ {q:'"It was me who broke it," he said. → He ____ (admit) breaking it.', a:["admitted"]},
+ {q:'"Why don\'t we meet on Friday?" → She ____ (suggest) meeting on Friday.', a:["suggested"]}]},
+
+{id:"relative", t:"Mệnh đề quan hệ & rút gọn",
+ sub:"Defining, non-defining, participle clauses",
+ html:`<p><b>Xác định (defining)</b> — thông tin thiết yếu, <i>không</i> có dấu phẩy. Có thể bỏ đại từ quan hệ khi nó là tân ngữ:</p>
+ <p class="en">The book (that) I borrowed <span class="hl">was</span> excellent.</p>
+ <p><b>Không xác định (non-defining)</b> — thông tin bổ sung, <i>có</i> dấu phẩy, <b>không</b> dùng <span class="en">that</span> và không được lược bỏ:</p>
+ <p class="en">My neighbour, <span class="hl">who works nights</span>, sleeps all morning.</p>
+ <p><b>Giới từ + which/whom</b> (văn viết trang trọng): <span class="en">the issue <b>to which</b> she referred</span> = <span class="en">the issue she referred to</span>.</p>
+ <p><b>which</b> thay cho cả mệnh đề trước đó: <span class="en">He arrived late, <b>which</b> annoyed everyone.</span></p>
+ <p><b>Rút gọn thành phân từ:</b></p>
+ <table class="gtab">
+ <tr><td class="en">the man who is standing there</td><td>→</td><td class="en">the man standing there</td></tr>
+ <tr><td class="en">the letters which were sent yesterday</td><td>→</td><td class="en">the letters sent yesterday</td></tr>
+ <tr><td class="en">the first person who arrived</td><td>→</td><td class="en">the first person to arrive</td></tr></table>`,
+ ex:[
+ {q:"That's the café ____ we first met. (nơi chốn)", a:["where"]},
+ {q:"My sister, ____ lives in Hue, is a nurse.", a:["who"]},
+ {q:"The train was cancelled, ____ meant we had to wait two hours.", a:["which"]},
+ {q:"The candidates ____ (select) for interview will be contacted. (rút gọn bị động)", a:["selected"]}]},
+
+{id:"modals", t:"Modal verbs of deduction",
+ sub:"Suy đoán về hiện tại và quá khứ",
+ html:`<table class="gtab"><tr><th>Mức độ</th><th>Hiện tại</th><th>Quá khứ</th></tr>
+ <tr><td>Chắc chắn đúng</td><td class="en">must be</td><td class="en">must have been</td></tr>
+ <tr><td>Có thể</td><td class="en">may / might / could be</td><td class="en">may / might / could have been</td></tr>
+ <tr><td>Chắc chắn không</td><td class="en">can't be</td><td class="en">can't / couldn't have been</td></tr></table>
+ <p class="en">The lights are off — they <span class="hl">must have gone</span> out.</p>
+ <p class="en">She <span class="hl">can't have finished</span> already; she only started an hour ago.</p>
+ <p><b>Phân biệt với nghĩa khác của modal:</b></p>
+ <table class="gtab">
+ <tr><td class="en">should have + V3</td><td>đáng lẽ nên (nhưng đã không)</td><td class="en">You should have told me.</td></tr>
+ <tr><td class="en">needn't have + V3</td><td>đã làm nhưng hoá ra không cần</td><td class="en">You needn't have cooked — we ate on the way.</td></tr>
+ <tr><td class="en">didn't need to + V</td><td>không cần nên đã không làm</td><td class="en">I didn't need to buy milk.</td></tr></table>
+ <p class="note">Dùng <span class="en">can't have</span>, không dùng <span class="pen">mustn't have</span>, để phủ định suy đoán.</p>`,
+ ex:[
+ {q:"He's not answering. He ____ (be) asleep. (suy đoán chắc chắn)", a:["must be"]},
+ {q:"She ____ (not / see) us — she walked straight past. (chắc chắn không)", a:["can't have seen","couldn't have seen","cannot have seen"]},
+ {q:"You ____ (tell) me it was formal! I wore jeans. (đáng lẽ nên)", a:["should have told"]},
+ {q:"We ____ (not / hurry); the film started half an hour late. (đã vội mà hoá ra không cần)", a:["needn't have hurried","need not have hurried"]}]},
+
+{id:"ing_inf", t:"Gerund hay Infinitive?",
+ sub:"V-ing, to V và những cặp đổi nghĩa",
+ html:`<table class="gtab">
+ <tr><th>Theo sau là V-ing</th><th>Theo sau là to V</th></tr>
+ <tr><td class="en">avoid, enjoy, mind, suggest, deny, admit, risk, consider, practise, can't stand, look forward to, be used to</td><td class="en">decide, hope, offer, refuse, promise, manage, afford, agree, seem, pretend, tend</td></tr></table>
+ <p><b>Cặp đổi nghĩa — hay ra trong đề thi B2:</b></p>
+ <table class="gtab">
+ <tr><td class="en">stop <b>smoking</b></td><td>bỏ hút thuốc</td><td class="en">stop <b>to smoke</b></td><td>dừng lại để hút</td></tr>
+ <tr><td class="en">remember <b>locking</b></td><td>nhớ là đã khoá</td><td class="en">remember <b>to lock</b></td><td>nhớ phải khoá</td></tr>
+ <tr><td class="en">try <b>calling</b></td><td>thử gọi xem sao</td><td class="en">try <b>to call</b></td><td>cố gắng gọi</td></tr>
+ <tr><td class="en">regret <b>telling</b></td><td>hối hận vì đã nói</td><td class="en">regret <b>to tell</b></td><td>rất tiếc phải báo</td></tr>
+ <tr><td class="en">mean <b>waiting</b></td><td>đồng nghĩa với việc phải chờ</td><td class="en">mean <b>to wait</b></td><td>có ý định chờ</td></tr></table>
+ <p class="note">Sau giới từ luôn là V-ing: <span class="en">She's good <b>at solving</b> problems.</span> — kể cả <span class="en">to</span> trong <span class="en">look forward to</span>, <span class="en">be used to</span>, <span class="en">object to</span>.</p>`,
+ ex:[
+ {q:"I look forward to ____ (hear) from you.", a:["hearing"]},
+ {q:"He stopped ____ (buy) a coffee on the way to work.", a:["to buy"]},
+ {q:"Remember ____ (turn) off the lights when you leave.", a:["to turn"]},
+ {q:"They can't afford ____ (move) to a bigger flat.", a:["to move"]}]},
+
+{id:"linking", t:"Liên từ & từ nối cho bài viết B2",
+ sub:"Tương phản, nguyên nhân, kết quả, nhượng bộ",
+ html:`<table class="gtab"><tr><th>Ý</th><th>+ mệnh đề (S + V)</th><th>+ danh từ / V-ing</th><th>Trạng từ nối câu</th></tr>
+ <tr><td>Tương phản</td><td class="en">although, though, even though, while, whereas</td><td class="en">despite, in spite of</td><td class="en">however, nevertheless, on the other hand</td></tr>
+ <tr><td>Nguyên nhân</td><td class="en">because, since, as</td><td class="en">because of, due to, owing to</td><td class="en">—</td></tr>
+ <tr><td>Kết quả</td><td class="en">so, so … that</td><td class="en">—</td><td class="en">therefore, consequently, as a result</td></tr>
+ <tr><td>Mục đích</td><td class="en">so that, in order that</td><td class="en">to, in order to, so as to</td><td class="en">—</td></tr></table>
+ <p class="en ok">Although the weather was bad, we enjoyed the trip.</p>
+ <p class="en ok">Despite the bad weather, we enjoyed the trip.</p>
+ <p class="en pen">Despite the weather was bad, we enjoyed the trip. ✗</p>
+ <p class="note">Mẹo nhớ: <span class="en">despite / in spite of</span> theo sau là <b>danh từ</b>. Muốn dùng với mệnh đề, thêm <span class="en">the fact that</span>: <span class="en">despite <b>the fact that</b> the weather was bad</span>.</p>`,
+ ex:[
+ {q:"____ the high price, the tickets sold out in an hour. (+ danh từ)", a:["despite","in spite of"]},
+ {q:"The road was closed, ____ we had to take a detour.", a:["so"]},
+ {q:"She took the job ____ the long commute. (+ danh từ)", a:["despite","in spite of"]},
+ {q:"____ he had trained hard, he didn't win. (+ mệnh đề)", a:["although","though","even though"]}]},
+
+{id:"inversion", t:"Đảo ngữ & nhấn mạnh",
+ sub:"Hardly, no sooner, not only, cleft sentences",
+ html:`<p>Khi đưa trạng từ phủ định lên đầu câu, phải <b>đảo trợ động từ lên trước chủ ngữ</b>:</p>
+ <table class="gtab">
+ <tr><td class="en">Never have I seen such a mess.</td><td>Chưa bao giờ tôi thấy lộn xộn như vậy.</td></tr>
+ <tr><td class="en">Hardly had we sat down when the phone rang.</td><td>Vừa mới ngồi xuống thì chuông điện thoại reo.</td></tr>
+ <tr><td class="en">No sooner had he left than it started to rain.</td><td>Anh ấy vừa đi thì trời bắt đầu mưa.</td></tr>
+ <tr><td class="en">Not only did she apologise, but she also paid for the damage.</td><td>Không những xin lỗi, cô ấy còn đền thiệt hại.</td></tr>
+ <tr><td class="en">Only after the meeting did I understand the problem.</td><td>Chỉ sau cuộc họp tôi mới hiểu vấn đề.</td></tr></table>
+ <p>Chú ý cặp cố định: <span class="en">hardly … <b>when</b></span> nhưng <span class="en">no sooner … <b>than</b></span>.</p>
+ <p><b>Câu chẻ (cleft)</b> để nhấn mạnh một thành phần:</p>
+ <p class="en">It was <span class="hl">Mai</span> who suggested the idea. / What I need is <span class="hl">a week off</span>.</p>`,
+ ex:[
+ {q:"Never ____ I heard such a ridiculous excuse. (điền trợ động từ)", a:["have"]},
+ {q:"No sooner had she arrived ____ the meeting began.", a:["than"]},
+ {q:"Not only ____ he forget my name, he also forgot the date.", a:["did"]},
+ {q:"____ was Lan who booked the tickets, not me. (câu chẻ)", a:["it"]}]}
+];
+
+const QUIZ = [
+{q:"By the time we ____ at the theatre, the play had already begun.",o:["arrive","arrived","had arrived","were arriving"],c:1,e:"Mệnh đề chính đã dùng Past Perfect, nên mệnh đề 'by the time' dùng Past Simple."},
+{q:"She's not in the office. She ____ have gone home early.",o:["can","must","should","would"],c:1,e:"'must have + V3' = suy đoán gần như chắc chắn về quá khứ."},
+{q:"____ the traffic, we still got there on time.",o:["Although","Despite","However","Because"],c:1,e:"'Despite' + cụm danh từ ('the traffic')."},
+{q:"If I ____ about the meeting, I would have come.",o:["knew","have known","had known","would know"],c:2,e:"Điều kiện loại 3: If + had + V3, would have + V3."},
+{q:"He denied ____ anything about the missing files.",o:["to know","knowing","know","known"],c:1,e:"'deny' luôn đi với V-ing."},
+{q:"This is the colleague ____ I share an office.",o:["who","that","with whom","whose"],c:2,e:"Giới từ + whom trong văn trang trọng: 'with whom I share an office'."},
+{q:"I'd rather you ____ tell anyone about this.",o:["don't","didn't","won't","not"],c:1,e:"'would rather + S + V quá khứ' để nói mong muốn người khác làm gì."},
+{q:"The new rules ____ next month.",o:["will implement","are implementing","will be implemented","implement"],c:2,e:"Chủ ngữ 'rules' chịu tác động ⇒ bị động tương lai."},
+{q:"Hardly had the concert started ____ the power went out.",o:["than","when","that","then"],c:1,e:"'hardly … when' đi thành cặp; 'no sooner … than'."},
+{q:"There's ____ difference between the two models, so buy the cheaper one.",o:["a considerable","negligible","substantial","a significant"],c:1,e:"'negligible' = không đáng kể, hợp với logic 'mua cái rẻ hơn'."},
+{q:"She's been trying to ____ down on the amount of coffee she drinks.",o:["cut","take","put","get"],c:0,e:"'cut down on' = cắt giảm."},
+{q:"It ____ that the company will announce job cuts.",o:["is expecting","expects","is expected","has expected"],c:2,e:"Cấu trúc bị động tường thuật: It is expected that…"},
+{q:"We had the roof ____ after the storm.",o:["repair","repairing","to repair","repaired"],c:3,e:"'have something done' = nhờ ai đó làm."},
+{q:"____ I known you were coming, I'd have cooked more.",o:["If","Should","Had","Have"],c:2,e:"Đảo ngữ của điều kiện loại 3: Had + S + V3."},
+{q:"The evidence is ____; nobody can seriously dispute it.",o:["ambiguous","plausible","compelling","reluctant"],c:2,e:"'compelling' = thuyết phục mạnh mẽ."},
+{q:"I regret ____ you that your application was unsuccessful.",o:["telling","to tell","tell","told"],c:1,e:"'regret to tell/inform' = rất tiếc phải báo tin (tin xấu sắp nói)."},
+{q:"He ____ for three hours by the time the rescue team found him.",o:["walked","was walking","had been walking","has been walking"],c:2,e:"Quá trình kéo dài trước một mốc quá khứ ⇒ Past Perfect Continuous."},
+{q:"Water ____ scarce in several provinces during the dry season.",o:["becomes","is becoming","became","has become"],c:1,e:"Xu hướng đang diễn ra ⇒ Present Continuous."},
+{q:"She insisted ____ for the meal.",o:["to pay","on paying","paying","that pay"],c:1,e:"'insist on + V-ing'."},
+{q:"The report, ____ was published last week, has been widely criticised.",o:["that","which","who","what"],c:1,e:"Mệnh đề không xác định (có dấu phẩy) không dùng 'that'."},
+{q:"You ____ have carried all those boxes — I would have helped.",o:["mustn't","couldn't","needn't","shouldn't"],c:2,e:"'needn't have + V3' = đã làm nhưng thực ra không cần."},
+{q:"The government has failed to ____ the concerns of small businesses.",o:["alleviate","exceed","distinguish","fluctuate"],c:0,e:"'alleviate concerns' = xoa dịu lo ngại."},
+{q:"Not only ____ the deadline, but she also improved the design.",o:["she met","did she meet","she did meet","met she"],c:1,e:"Sau 'Not only' đầu câu phải đảo trợ động từ."},
+{q:"I'm not used to ____ up so early.",o:["get","getting","got","have got"],c:1,e:"'be used to' + V-ing (đã quen với việc gì)."},
+{q:"He came ____ as rude, although he didn't mean to be.",o:["across","over","up","into"],c:0,e:"'come across as' = gây ấn tượng là."},
+{q:"The proposal is not financially ____ in its current form.",o:["eligible","viable","versatile","evident"],c:1,e:"'financially viable' = khả thi về tài chính."},
+{q:"If only I ____ that job offer last year!",o:["accepted","had accepted","would accept","have accepted"],c:1,e:"Tiếc nuối về quá khứ ⇒ wish/if only + had + V3."},
+{q:"They're thought ____ the country before the police arrived.",o:["to leave","to be leaving","to have left","leaving"],c:2,e:"Hành động xảy ra trước ⇒ to have + V3."},
+{q:"____ hard she tried, she couldn't open the jar.",o:["Although","However","Whatever","Despite"],c:1,e:"'However + tính từ/trạng từ + S + V' = dù … đến đâu."},
+{q:"The company had to ____ responsibility for the data breach.",o:["make","take","do","give"],c:1,e:"Collocation: take responsibility for."},
+{q:"We can't ____ out the possibility of further delays.",o:["rule","take","turn","put"],c:0,e:"'rule out' = loại trừ khả năng."},
+{q:"A ____ number of employees said they would leave within a year.",o:["negligible","scarce","substantial","thorough"],c:2,e:"'a substantial number' = một số lượng đáng kể."},
+{q:"She said she ____ call me the following day.",o:["will","would","is going to","shall"],c:1,e:"Tường thuật lùi thì: will → would."},
+{q:"The students ____ for the scholarship must submit a portfolio.",o:["applying","apply","applied","to applying"],c:0,e:"Rút gọn mệnh đề chủ động: who are applying → applying."},
+{q:"It's high time we ____ this conversation seriously.",o:["take","took","have taken","are taking"],c:1,e:"'It's (high) time + S + V quá khứ'."},
+{q:"Sales have ____ sharply since the new store opened.",o:["fluctuated","distinguished","justified","perceived"],c:0,e:"'fluctuate' = dao động lên xuống."},
+{q:"He was accused ____ falsifying the accounts.",o:["for","of","with","to"],c:1,e:"'accuse somebody of + V-ing'."},
+{q:"Under no circumstances ____ the emergency exit be blocked.",o:["should","should not","it should","must to"],c:0,e:"Cụm phủ định đầu câu ⇒ đảo ngữ: Under no circumstances should…"},
+{q:"The two designs are so similar that it's hard to ____ between them.",o:["diminish","distinguish","determine","deteriorate"],c:1,e:"'distinguish between A and B' = phân biệt."},
+{q:"I'd have phoned you, but my battery ____.",o:["died","had died","has died","was dying"],c:0,e:"Hành động quá khứ đơn nối tiếp mạch kể; không cần Past Perfect."},
+{q:"This software is remarkably ____: it works for students and professionals alike.",o:["persistent","versatile","ongoing","prominent"],c:1,e:"'versatile' = đa năng, dùng được nhiều mục đích."},
+{q:"____ having little experience, she was offered the position.",o:["Although","Despite","However","Because"],c:1,e:"'Despite' + V-ing."},
+{q:"You ____ to submit the form by Friday, or your application won't be considered.",o:["need","needs","are needing","needed"],c:0,e:"'need to + V' ở hiện tại đơn với chủ ngữ 'you'."},
+{q:"The film, ____ I'd been looking forward to for months, was a disappointment.",o:["that","what","which","who"],c:2,e:"Mệnh đề không xác định ⇒ 'which'."},
+{q:"Having ____ the instructions twice, he still couldn't assemble the shelf.",o:["read","reading","been read","to read"],c:0,e:"'Having + V3' = phân từ hoàn thành."}
+];
+
+const READING = [
+{id:"r1", t:"The Four-Day Week Goes Mainstream", sub:"Xã hội & lao động · ~300 từ",
+ body:`<p>For most of the last century, the five-day working week was treated as a fact of life rather than a choice. That assumption is now being tested. Since 2022, hundreds of companies across Europe, Asia and North America have run trials in which staff work four days a week for the same pay, on the condition that they maintain their previous level of output.</p>
+ <p>The results have been more encouraging than many employers expected. In the largest coordinated trial, carried out in the United Kingdom, the vast majority of participating firms chose to keep the shorter week once the trial had finished. Managers reported that staff turnover fell sharply and that fewer employees took sick leave. Workers, for their part, said they slept better and found it easier to manage responsibilities at home.</p>
+ <p>Critics argue that these findings should be treated with caution. Firms that volunteer for such trials are likely to be unusually well organised in the first place, and the sectors involved have tended to be office-based. It is far from obvious how a four-day week could be introduced in a hospital, a factory or a school without hiring additional staff, which would raise costs considerably.</p>
+ <p>Supporters accept the point but insist the principle still holds. They argue that much of the traditional working week is consumed by meetings that achieve little and by tasks that exist mainly to demonstrate effort. Removing a day, they claim, forces organisations to distinguish between work that creates value and work that merely fills time.</p>
+ <p>Whether the four-day week becomes standard will probably depend less on ideology than on competition for talent. If skilled workers begin to expect it, employers may find that the question has already been decided for them.</p>`,
+ gloss:[["turnover","tỷ lệ nhân viên nghỉ việc"],["sick leave","nghỉ ốm"],["far from obvious","hoàn toàn không hiển nhiên"],["fills time","chỉ để lấp thời gian"],["competition for talent","cuộc cạnh tranh giành nhân tài"]],
+ q:[
+  {q:"What condition applied to staff in the trials?",o:["They accepted lower pay.","They kept up their previous output.","They worked longer days.","They agreed not to take holidays."],c:1,e:"Đoạn 1: cùng mức lương, với điều kiện giữ nguyên năng suất trước đó."},
+  {q:"What happened after the UK trial ended?",o:["Most firms went back to five days.","Most firms kept the four-day week.","The trial results were never published.","Firms increased salaries instead."],c:1,e:"Đoạn 2: đa số doanh nghiệp tham gia chọn giữ lại tuần làm việc ngắn hơn."},
+  {q:"Why do critics urge caution?",o:["The trials lost money.","Staff complained about the change.","The firms involved may not be typical.","Governments opposed the trials."],c:2,e:"Đoạn 3: doanh nghiệp tự nguyện tham gia thường vốn đã tổ chức tốt."},
+  {q:"What do supporters say about the traditional week?",o:["It is too short.","Much of it is unproductive.","It suits factories best.","It was designed by unions."],c:1,e:"Đoạn 4: nhiều thời gian bị tiêu vào họp hành ít hiệu quả và việc chỉ để chứng tỏ nỗ lực."},
+  {q:"What does the writer suggest will decide the issue?",o:["Political ideology","Government legislation","The labour market","Technological change"],c:2,e:"Đoạn cuối: phụ thuộc vào cạnh tranh nhân tài hơn là hệ tư tưởng."}]},
+
+{id:"r2", t:"Why Cities Are Planting Trees", sub:"Môi trường đô thị · ~290 từ",
+ body:`<p>When a city council announces that it intends to plant a hundred thousand trees, most residents assume the aim is to make the streets look greener. Increasingly, though, the main motive is temperature.</p>
+ <p>Dense urban areas can be several degrees warmer than the countryside surrounding them, a phenomenon known as the urban heat island effect. Concrete, asphalt and brick absorb heat during the day and release it slowly after dark, so that cities cool down far more slowly than open land. During a heatwave, this difference is not merely uncomfortable; it is dangerous, particularly for elderly people and for anyone whose home has no air conditioning.</p>
+ <p>Trees reduce the problem in two ways. The most obvious is shade: a mature tree can prevent a large amount of sunlight from ever reaching the pavement beneath it. The second mechanism is less visible. As water evaporates from their leaves, trees draw heat from the surrounding air, in much the same way that sweating cools the human body. Measurements taken in several European cities suggest that a well-shaded street can be noticeably cooler than an identical street without trees a few hundred metres away.</p>
+ <p>The difficulty lies in maintenance. Young trees planted along busy roads are exposed to pollution, road salt and compacted soil, and a substantial proportion die within their first few years unless they are watered regularly. Planting is cheap and highly visible; watering is expensive and attracts no attention whatsoever.</p>
+ <p>For this reason, researchers who study urban forests tend to judge a city not by the number of trees it plants but by the number still alive a decade later. By that measure, the record of most cities is considerably less impressive than their press releases suggest.</p>`,
+ gloss:[["urban heat island effect","hiệu ứng đảo nhiệt đô thị"],["pavement","vỉa hè (Anh-Anh)"],["evaporate","bay hơi"],["compacted soil","đất bị nén chặt"],["press release","thông cáo báo chí"]],
+ q:[
+  {q:"What is the main reason cities now plant trees, according to the text?",o:["To improve appearance","To lower temperatures","To reduce noise","To attract tourists"],c:1,e:"Đoạn 1: động cơ chính ngày càng là nhiệt độ."},
+  {q:"Why do cities stay warm at night?",o:["Traffic continues after dark.","Building materials release stored heat slowly.","There is less wind in cities.","Air conditioning warms the streets."],c:1,e:"Đoạn 2: bê tông, nhựa đường, gạch hấp thụ nhiệt ban ngày và toả ra chậm."},
+  {q:"The second cooling mechanism is compared to:",o:["a fan","sweating","rainfall","shade from a building"],c:1,e:"Đoạn 3: nước bay hơi từ lá, giống cơ chế đổ mồ hôi làm mát cơ thể."},
+  {q:"What is the central difficulty the writer identifies?",o:["Finding space to plant","Keeping young trees alive","Choosing suitable species","Public opposition"],c:1,e:"Đoạn 4: khó khăn nằm ở khâu chăm sóc, cây non chết nhiều nếu không được tưới."},
+  {q:"The final paragraph implies that cities:",o:["exaggerate their achievements","plant too few trees","should stop planting","have solved the problem"],c:0,e:"Đoạn cuối: thành tích thực tế kém ấn tượng hơn nhiều so với thông cáo báo chí."}]},
+
+{id:"r3", t:"How Habits Are Built", sub:"Tâm lý học · ~280 từ",
+ body:`<p>Anyone who has tried to take up running in January and abandoned it by February knows that motivation is unreliable. Psychologists who study habit formation argue that this is precisely the point: habits exist so that behaviour does not have to depend on motivation at all.</p>
+ <p>A habit, in technical terms, is a learned association between a situation and a response. The situation — researchers usually call it a cue — might be a time of day, a place, an emotional state or the end of another routine. Once the association is strong enough, the cue triggers the behaviour with little conscious deliberation. This is why people often find themselves halfway through a packet of biscuits without remembering the decision to open it.</p>
+ <p>The practical implication is that the cue deserves more attention than the goal. Someone who resolves to "read more" has set an outcome; someone who decides to read ten pages immediately after brushing their teeth at night has attached a specific behaviour to a stable, daily cue. Studies consistently find that plans of the second kind are far more likely to survive.</p>
+ <p>How long the process takes is frequently misreported. The often-quoted figure of twenty-one days has little evidence behind it. One widely cited study found that the average was closer to two months, but the range among participants was enormous, stretching from under three weeks to the best part of a year, depending on the person and the complexity of the behaviour.</p>
+ <p>Perhaps the most useful finding is the least dramatic. Missing a single day, the researchers concluded, had no measurable effect on the eventual strength of the habit. What mattered was returning the following day.</p>`,
+ gloss:[["cue","tín hiệu kích hoạt hành vi"],["deliberation","sự cân nhắc có ý thức"],["resolve to","quyết tâm làm gì"],["widely cited","được trích dẫn rộng rãi"],["the best part of a year","gần trọn một năm"]],
+ q:[
+  {q:"According to the writer, why do habits matter?",o:["They increase motivation.","They make behaviour independent of motivation.","They are easy to form.","They replace goals entirely."],c:1,e:"Đoạn 1: thói quen tồn tại để hành vi không phải phụ thuộc vào động lực."},
+  {q:"The biscuit example illustrates that:",o:["people eat too much sugar","habits run with little conscious thought","cues are always visual","habits are hard to break"],c:1,e:"Đoạn 2: tín hiệu kích hoạt hành vi mà gần như không cần cân nhắc có ý thức."},
+  {q:"Which plan is more likely to succeed?",o:["\"I'll read more this year.\"","\"I'll read ten pages after brushing my teeth.\"","\"I'll buy more books.\"","\"I'll read when I feel motivated.\""],c:1,e:"Đoạn 3: hành vi cụ thể gắn với một tín hiệu ổn định hằng ngày."},
+  {q:"What does the writer say about the 21-day figure?",o:["It is well supported.","It applies only to exercise.","It lacks solid evidence.","It was never published."],c:2,e:"Đoạn 4: con số 21 ngày gần như không có bằng chứng."},
+  {q:"What was the researchers' most useful conclusion?",o:["Missing one day does no lasting harm.","Habits take exactly two months.","Complex habits never form.","Motivation is essential."],c:0,e:"Đoạn cuối: bỏ lỡ một ngày không ảnh hưởng đo được; quan trọng là quay lại vào hôm sau."}]}
+];
+
+const DICTATION = [
+"The meeting has been postponed until further notice.",
+"I wish I had known about the change earlier.",
+"Despite the heavy rain, the match went ahead as planned.",
+"She is thought to have left the company last March.",
+"Hardly had we sat down when the fire alarm went off.",
+"You should have told me that the deadline had moved.",
+"The council is planting trees to reduce the temperature in the city centre.",
+"If I were you, I'd apply before the end of the month.",
+"He denied taking the documents from the office.",
+"We had the heating repaired just before winter.",
+"Not only did she finish early, but she also improved the design.",
+"There is widespread agreement that the system needs reform.",
+"By the time the guests arrived, everything had been prepared.",
+"It is far from obvious how the plan could work in practice."
+];
+
+const WRITING = [
+{id:"w1", t:"Bài luận nêu quan điểm (essay)", target:"140–190 từ",
+ prompt:"Some people believe that students should be required to study a foreign language until they leave school. Others think it should be optional after the age of 14. Discuss both views and give your own opinion.",
+ struct:["Mở bài: nêu lại vấn đề bằng lời của bạn + báo hướng bài viết.","Thân 1: quan điểm thứ nhất + một lý do + một ví dụ cụ thể.","Thân 2: quan điểm thứ hai + lý do + ví dụ.","Kết: nêu quan điểm riêng, có điều kiện/giới hạn rõ ràng."],
+ phrases:["It is often argued that…","Those in favour point out that…","A common objection to this view is that…","On balance, I would argue that…","provided that / as long as…"]},
+{id:"w2", t:"Thư trang trọng khiếu nại", target:"140–190 từ",
+ prompt:"You booked a three-day training course online. The course started a day late, the promised materials were never sent, and the room was too small. Write a letter of complaint to the organiser asking for a partial refund.",
+ struct:["Nêu rõ lý do viết thư + chi tiết đơn hàng (ngày, mã đặt chỗ).","Liệt kê vấn đề theo thứ tự nghiêm trọng, mỗi vấn đề một câu rõ ràng.","Nêu tác động cụ thể đến bạn.","Nêu yêu cầu cụ thể + thời hạn phản hồi mong muốn."],
+ phrases:["I am writing to express my dissatisfaction with…","On arrival, I was informed that…","This caused considerable inconvenience because…","I would therefore be grateful if you could…","I look forward to receiving your response within 14 days."]},
+{id:"w3", t:"Bài đánh giá (review)", target:"140–190 từ",
+ prompt:"Write a review of an app, a course or a place you have used recently for an online magazine. Say who it is suitable for and whether you would recommend it.",
+ struct:["Câu mở gây chú ý + cho biết bạn đang đánh giá cái gì.","Mô tả ngắn gọn (đừng kể lể quá nhiều chi tiết).","Điểm mạnh — kèm ví dụ cụ thể, không nói chung chung.","Ít nhất một điểm yếu để bài viết đáng tin.","Khuyến nghị: hợp với ai, không hợp với ai."],
+ phrases:["What sets it apart is…","The main drawback is that…","It is well worth the price if…","I would recommend it to anyone who…","Don't expect… , but…"]},
+{id:"w4", t:"Báo cáo / đề xuất (report)", target:"140–190 từ",
+ prompt:"Your college is deciding how to spend a small budget on improving student facilities. Write a report describing the current situation and recommending two improvements.",
+ struct:["Tiêu đề + mục đích báo cáo (một câu).","Hiện trạng: nêu sự thật, giọng khách quan, không cảm tính.","Đề xuất 1 + lý do + lợi ích dự kiến.","Đề xuất 2 + lý do.","Kết luận ngắn: ưu tiên cái nào và vì sao."],
+ phrases:["The purpose of this report is to…","At present, students report that…","It is recommended that the college…","This would benefit… in the sense that…","Should funding allow, a further option would be…"]}
+];
+
+const NAV = [
+ {id:"home", ico:"◆", label:"Hôm nay"},
+ {id:"vocab", ico:"▤", label:"Từ vựng"},
+ {id:"notes", ico:"★", label:"Sổ tay"},
+ {id:"grammar", ico:"§", label:"Ngữ pháp"},
+ {id:"quiz", ico:"✓", label:"Luyện tập"},
+ {id:"reading", ico:"❡", label:"Đọc hiểu"},
+ {id:"listen", ico:"♪", label:"Nghe & chép"},
+ {id:"write", ico:"✎", label:"Viết"}
+];
+
+/* =========================================================
+   TRẠNG THÁI & LƯU TIẾN ĐỘ
+   ========================================================= */
+const KEY = "b2vn.v1";
+const DEF = {known:{}, xp:0, quizBest:0, quizRuns:0, grammarDone:{}, readDone:{}, dictDone:{}, essays:{}, notes:[], streak:0, last:null, theme:null};
+let S = Object.assign({}, DEF);
+
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw) S = Object.assign({}, DEF, JSON.parse(raw));
+    if(!Array.isArray(S.notes)) S.notes = [];
+  }catch(e){ /* bộ nhớ trình duyệt không dùng được: chạy tạm trong phiên này */ }
+}
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
+}
+function today(){ return new Date().toISOString().slice(0,10); }
+function touchStreak(){
+  const t = today();
+  if(S.last === t) return;
+  const y = new Date(Date.now()-86400000).toISOString().slice(0,10);
+  S.streak = (S.last === y) ? (S.streak||0)+1 : 1;
+  S.last = t; save();
+}
+function addXp(n){ S.xp = (S.xp||0)+n; touchStreak(); save(); paintRail(); }
+
+/* --- sổ tay --- */
+const TAGS = {core:"Từ học thuật", phrasal:"Cụm động từ", colloc:"Collocation", mine:"Tự thêm", sentence:"Mẫu câu"};
+function hasNote(w){ return (S.notes||[]).some(n => norm(n.w) === norm(w)); }
+function addNote(o){
+  if(!o.w || !String(o.w).trim()) return false;
+  if(hasNote(o.w)) return false;
+  S.notes.unshift(Object.assign({
+    id: "n" + Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+    added: today(), tag: "mine", ipa:"", p:"", vi:"", ex:"", exvi:"", note:""
+  }, o));
+  save(); return true;
+}
+function delNote(id){ S.notes = (S.notes||[]).filter(n => n.id !== id); save(); }
+
+/* =========================================================
+   TIỆN ÍCH
+   ========================================================= */
+const $ = (s,r)=> (r||document).querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function norm(s){
+  return String(s).toLowerCase().replace(/[’']/g,"'").replace(/[.,!?;:"“”]/g,"").replace(/\s+/g," ").trim();
+}
+function shuffle(a){ const b=a.slice(); for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]];} return b; }
+
+let voice = null;
+function pickVoice(){
+  if(!("speechSynthesis" in window)) return;
+  const vs = speechSynthesis.getVoices().filter(v=>/^en(-|_)/i.test(v.lang));
+  voice = vs.find(v=>/GB|UK/i.test(v.lang)) || vs[0] || null;
+}
+if("speechSynthesis" in window){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function say(text, rate){
+  if(!("speechSynthesis" in window)) return false;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-GB"; u.rate = rate || 0.95;
+  if(voice) u.voice = voice;
+  speechSynthesis.speak(u);
+  return true;
+}
+function speakBtn(text, label){
+  return '<button class="speak" data-say="'+esc(text)+'" title="Nghe" aria-label="Nghe '+esc(label||"phát âm")+'">♪</button>';
+}
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-say]");
+  if(b){ if(!say(b.getAttribute("data-say"))) b.textContent="✕"; }
+});
+
+/* =========================================================
+   ĐIỀU HƯỚNG
+   ========================================================= */
+let route = "home";
+function paintNav(){
+  $("#navlist").innerHTML = NAV.map(n =>
+    '<button class="navbtn" data-go="'+n.id+'"'+(route===n.id?' aria-current="page"':'')+'><span class="ico">'+n.ico+'</span>'+n.label+'</button>').join("");
+  $("#tabbar").innerHTML = NAV.map(n =>
+    '<button data-go="'+n.id+'"'+(route===n.id?' aria-current="page"':'')+'><i>'+n.ico+'</i>'+n.label+'</button>').join("");
+}
+function paintRail(){
+  const learned = Object.keys(S.known||{}).length;
+  $("#railStreak").innerHTML = '<b>'+(S.streak||0)+'</b> ngày liên tiếp · <b>'+(S.xp||0)+'</b> điểm<br>'+learned+'/'+VOCAB.length+' từ đã thuộc<br>'+((S.notes||[]).length)+' mục trong sổ tay';
+}
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-go]");
+  if(b){ go(b.getAttribute("data-go")); }
+});
+document.addEventListener("click", e=>{
+  let b;
+  if((b = e.target.closest("[data-g]"))){ grammarDetail(+b.getAttribute("data-g")); return; }
+  if((b = e.target.closest("[data-r]"))){ readDetail(+b.getAttribute("data-r")); return; }
+  if((b = e.target.closest("[data-w]"))){ writeDetail(+b.getAttribute("data-w")); return; }
+  if((b = e.target.closest("[data-rate]"))){ dRate = parseFloat(b.getAttribute("data-rate")); VIEWS.listen(); return; }
+  if((b = e.target.closest("[data-deck]"))){ vDeck = b.getAttribute("data-deck"); buildQueue(true); VIEWS.vocab(); return; }
+  if((b = e.target.closest("[data-savew]"))){
+    const v = VOCAB.find(x => x.w === b.getAttribute("data-savew"));
+    if(v && addNote({w:v.w, ipa:v.ipa, p:v.p, vi:v.vi, ex:v.ex, exvi:v.exvi, tag:v.d})){
+      b.outerHTML = '<span class="chip on">đã lưu</span>'; paintRail();
+    }
+    return;
+  }
+});
+function go(id){
+  route = id; paintNav();
+  window.scrollTo(0,0);
+  VIEWS[id]();
+  $("#view").focus({preventScroll:true});
+}
+
+/* =========================================================
+   MÀN HÌNH: HÔM NAY
+   ========================================================= */
+const VIEWS = {};
+VIEWS.home = function(){
+  const idx = (new Date().getDate() + new Date().getMonth()*31) % VOCAB.length;
+  const w = VOCAB[idx];
+  const learned = Object.keys(S.known||{}).length;
+  const pct = Math.round(learned/VOCAB.length*100);
+  const gDone = Object.keys(S.grammarDone||{}).length;
+  $("#view").innerHTML = `
+  <div class="hero">
+    <h1>Chào bạn — học một ít hôm nay thôi.</h1>
+    <p class="lede">Bốn việc nhỏ mỗi ngày là đủ để giữ trình độ B2: 10 thẻ từ vựng, một điểm ngữ pháp, một bài đọc, một câu chép chính tả.</p>
+    <div class="small">Từ của hôm nay</div>
+    <div class="wotd-wrap"><span class="wotd en">${esc(w.w)}</span></div>
+    <div class="row" style="margin-bottom:8px">
+      <span class="ipa">${esc(w.ipa)}</span><span class="chip">${esc(w.p)}</span>${speakBtn(w.w, w.w)}
+    </div>
+    <div style="font-weight:600">${esc(w.vi)}</div>
+    <p class="en" style="font-size:17px;margin:8px 0 0;max-width:56ch">${esc(w.ex)}</p>
+    <p class="small" style="margin-top:2px">${esc(w.exvi)}</p>
+  </div>
+
+  <h2>Tiến độ của bạn</h2>
+  <div class="grid2">
+    <div class="stat"><b>${S.streak||0}</b><span>ngày học liên tiếp</span></div>
+    <div class="stat"><b>${S.xp||0}</b><span>điểm tích luỹ</span></div>
+    <div class="stat"><b>${learned}<small style="font-size:14px">/${VOCAB.length}</small></b><span>từ đã đánh dấu thuộc</span>
+      <div class="bar" style="margin-top:8px"><i style="width:${pct}%"></i></div></div>
+    <div class="stat"><b>${S.quizBest||0}<small style="font-size:14px">/10</small></b><span>điểm cao nhất phần luyện tập</span></div>
+    <div class="stat"><b>${(S.notes||[]).length}</b><span>mục trong sổ tay</span></div>
+  </div>
+
+  <h2>Bắt đầu từ đâu</h2>
+  <div class="tlist">
+    <button class="titem" data-go="vocab"><b>Học 10 thẻ từ vựng</b><span>${VOCAB.length} từ, cụm động từ và collocation trình độ B2</span></button>
+    <button class="titem" data-go="notes"><b>Mở sổ tay</b><span>${(S.notes||[]).length} mục đã lưu · tự thêm từ, cụm từ, mẫu câu của riêng bạn</span></button>
+    <button class="titem" data-go="grammar"><b>Ôn một điểm ngữ pháp</b><span>${GRAMMAR.length} chủ điểm · đã hoàn thành ${gDone}</span></button>
+    <button class="titem" data-go="quiz"><b>Làm 10 câu trắc nghiệm</b><span>Ngân hàng ${QUIZ.length} câu, có giải thích từng đáp án</span></button>
+    <button class="titem" data-go="reading"><b>Đọc một bài ~300 từ</b><span>${READING.length} bài đọc kèm câu hỏi và bảng từ</span></button>
+    <button class="titem" data-go="listen"><b>Chép chính tả một câu</b><span>${DICTATION.length} câu, chỉnh được tốc độ đọc</span></button>
+    <button class="titem" data-go="write"><b>Viết một bài</b><span>${WRITING.length} đề · dàn ý, mẫu câu và bảng tự kiểm</span></button>
+  </div>`;
+  paintRail();
+};
+
+/* =========================================================
+   MÀN HÌNH: TỪ VỰNG
+   ========================================================= */
+let vDeck = "core", vQueue = [], vPos = 0, vFlipped = false;
+const DECKS = {core:"Từ học thuật", phrasal:"Cụm động từ", colloc:"Collocation"};
+function buildQueue(onlyUnknown){
+  let list = VOCAB.filter(v=>v.d===vDeck);
+  if(onlyUnknown) list = list.filter(v=>!S.known[v.w]);
+  if(!list.length) list = VOCAB.filter(v=>v.d===vDeck);
+  vQueue = shuffle(list); vPos = 0; vFlipped = false;
+}
+VIEWS.vocab = function(){
+  if(!vQueue.length) buildQueue(true);
+  $("#view").innerHTML = `
+  <h1>Từ vựng</h1>
+  <p class="lede">Nhìn từ, tự nhớ nghĩa rồi mới lật thẻ. Đánh dấu “Chưa thuộc” để từ đó quay lại trong lượt sau.</p>
+  <div class="row" style="margin-bottom:14px" id="deckRow">
+    ${Object.keys(DECKS).map(k=>'<button class="chip btn '+(vDeck===k?'on':'')+'" data-deck="'+k+'">'+DECKS[k]+' · '+VOCAB.filter(v=>v.d===k).length+'</button>').join("")}
+  </div>
+  <div id="flashHost"></div>
+  <h2>Danh sách ${DECKS[vDeck].toLowerCase()}</h2>
+  <div class="tlist" id="vlist"></div>`;
+  paintFlash(); paintVList();
+};
+function paintFlash(){
+  const host = $("#flashHost"); if(!host) return;
+  if(vPos >= vQueue.length){
+    host.innerHTML = `<div class="card flash"><div>
+      <div style="font-size:19px;font-weight:700">Xong bộ thẻ này rồi.</div>
+      <p class="small">Bạn đã đi hết ${vQueue.length} thẻ trong lượt vừa rồi.</p>
+      <div class="row" style="justify-content:center">
+        <button class="btn" id="againNew">Ôn lại các từ chưa thuộc</button>
+        <button class="btn ghost" id="againAll">Ôn lại toàn bộ</button>
+      </div></div></div>`;
+    $("#againNew").onclick = ()=>{ buildQueue(true); paintFlash(); };
+    $("#againAll").onclick = ()=>{ buildQueue(false); paintFlash(); };
+    return;
+  }
+  const v = vQueue[vPos];
+  host.innerHTML = `
+  <div class="card flash">
+    <div>
+      <div class="word en">${esc(v.w)}</div>
+      <div class="row" style="justify-content:center;margin-top:8px">
+        <span class="ipa">${esc(v.ipa)}</span><span class="chip">${esc(v.p)}</span>${speakBtn(v.w, v.w)}
+      </div>
+      ${vFlipped ? `<div class="vi">${esc(v.vi)}</div>
+        <p class="ex en">${esc(v.ex)}</p>
+        <p class="small" style="margin:4px 0 0">${esc(v.exvi)}</p>` : `<p class="small" style="margin-top:18px">Nhớ nghĩa trong đầu trước khi lật.</p>`}
+    </div>
+  </div>
+  <div class="spread" style="margin-top:12px">
+    <span class="small">Thẻ ${vPos+1}/${vQueue.length}</span>
+    <div class="row">
+      ${vFlipped
+        ? `<button class="btn ghost" id="fNo">Chưa thuộc</button><button class="btn" id="fYes">Đã thuộc</button>`
+        : `<button class="btn" id="fFlip">Xem nghĩa</button>`}
+    </div>
+  </div>`;
+  if(vFlipped){
+    $("#fNo").onclick = ()=>{ delete S.known[v.w]; save(); vPos++; vFlipped=false; paintFlash(); paintVList(); paintRail(); };
+    $("#fYes").onclick = ()=>{
+      if(!S.known[v.w]){ S.known[v.w]=1; addXp(2); }
+      addNote({w:v.w, ipa:v.ipa, p:v.p, vi:v.vi, ex:v.ex, exvi:v.exvi, tag:v.d});
+      save(); vPos++; vFlipped=false; paintFlash(); paintVList(); paintRail();
+    };
+  }else{
+    $("#fFlip").onclick = ()=>{ vFlipped=true; paintFlash(); };
+  }
+}
+function paintVList(){
+  const el = $("#vlist"); if(!el) return;
+  el.innerHTML = VOCAB.filter(v=>v.d===vDeck).map(v=>
+    `<div class="titem" style="cursor:default">
+      <div class="spread">
+        <div><b class="en">${esc(v.w)} <span class="ipa" style="font-weight:400">${esc(v.ipa)}</span></b>
+        <span>${esc(v.vi)}</span></div>
+        <div class="row">${hasNote(v.w)?'<span class="chip on">đã lưu</span>':'<button class="chip btn" data-savew="'+esc(v.w)+'">+ sổ tay</button>'}${speakBtn(v.w, v.w)}</div>
+      </div>
+    </div>`).join("");
+}
+
+/* =========================================================
+   MÀN HÌNH: SỔ TAY
+   ========================================================= */
+let nFilter = "all", nQuery = "", nSort = "new", nEdit = null;
+let rvQueue = null, rvPos = 0, rvFlip = false;
+
+function noteList(){
+  let list = (S.notes||[]).slice();
+  if(nFilter !== "all") list = list.filter(n => (n.tag||"mine") === nFilter);
+  const q = norm(nQuery);
+  if(q) list = list.filter(n => norm([n.w,n.vi,n.ex,n.note].join(" ")).indexOf(q) >= 0);
+  if(nSort === "az") list.sort((a,b) => String(a.w).toLowerCase().localeCompare(String(b.w).toLowerCase()));
+  return list;
+}
+
+VIEWS.notes = function(){
+  const all = S.notes || [];
+  const counts = {};
+  all.forEach(n => { const t = n.tag||"mine"; counts[t] = (counts[t]||0)+1; });
+  $("#view").innerHTML = `
+  <h1>Sổ tay của bạn</h1>
+  <p class="lede">Mọi từ bạn đánh dấu “Đã thuộc” đều tự vào đây. Bạn cũng có thể tự thêm từ, cụm từ hay mẫu câu gặp ngoài đời — trong phim, trong email công việc, trong tài liệu kỹ thuật.</p>
+
+  <div class="grid2" style="margin-bottom:20px">
+    <div class="stat"><b>${all.length}</b><span>mục đang lưu</span></div>
+    <div class="stat"><b>${counts.mine||0}</b><span>mục bạn tự thêm</span></div>
+    <div class="stat"><b>${all.filter(n=>n.added===today()).length}</b><span>thêm trong hôm nay</span></div>
+  </div>
+
+  <h2 style="margin-top:0">Thêm một mục</h2>
+  <div class="card stack">
+    <div class="tools" style="margin:0">
+      <input type="text" id="aW" placeholder="từ hoặc cụm từ tiếng Anh" autocomplete="off" spellcheck="false">
+      <input type="text" id="aVi" placeholder="nghĩa tiếng Việt">
+    </div>
+    <input type="text" id="aEx" class="en" placeholder="câu ví dụ (tuỳ chọn)" spellcheck="false">
+    <div class="tools" style="margin:0">
+      <input type="text" id="aNote" placeholder="ghi chú: gặp ở đâu, dùng khi nào (tuỳ chọn)">
+      <select id="aTag">
+        <option value="mine">Tự thêm</option>
+        <option value="sentence">Mẫu câu</option>
+        <option value="phrasal">Cụm động từ</option>
+        <option value="colloc">Collocation</option>
+        <option value="core">Từ học thuật</option>
+      </select>
+    </div>
+    <div class="spread">
+      <span class="small" id="aMsg"></span>
+      <button class="btn" id="aAdd">Lưu vào sổ tay</button>
+    </div>
+  </div>
+
+  <div id="revBox" style="margin-top:20px"></div>
+
+  <h2>Đã lưu</h2>
+  <div class="row" style="margin-bottom:10px">
+    ${[["all","Tất cả"],["mine","Tự thêm"],["sentence","Mẫu câu"],["core","Từ học thuật"],["phrasal","Cụm động từ"],["colloc","Collocation"]]
+      .map(f => '<button class="chip btn '+(nFilter===f[0]?'on':'')+'" data-nf="'+f[0]+'">'+f[1]+(f[0]==="all"?" · "+all.length:(counts[f[0]]?" · "+counts[f[0]]:""))+'</button>').join("")}
+  </div>
+  <div class="tools">
+    <input type="text" id="nQ" placeholder="tìm trong sổ tay…" value="${esc(nQuery)}" autocomplete="off">
+    <select id="nS">
+      <option value="new"${nSort==="new"?" selected":""}>Mới thêm trước</option>
+      <option value="az"${nSort==="az"?" selected":""}>Xếp theo A → Z</option>
+    </select>
+    <button class="btn ghost" id="nRev">Ôn tập sổ tay</button>
+  </div>
+  <div id="nList"></div>
+
+  <h2>Sao lưu & mang sang thiết bị khác</h2>
+  <details class="card">
+    <summary>Mở phần sao lưu</summary>
+    <p class="small">Sổ tay chỉ nằm trong trình duyệt này. Muốn dùng trên máy khác, hãy sao chép đoạn dữ liệu bên dưới rồi dán vào ô nhập ở máy kia.</p>
+    <textarea id="bkOut" rows="4" spellcheck="false" readonly></textarea>
+    <div class="row" style="margin:8px 0 16px">
+      <button class="btn sm" id="bkCopy">Sao chép dữ liệu</button>
+      <button class="btn ghost sm" id="bkTsv">Sao chép dạng bảng (dán vào Excel)</button>
+      <span class="small" id="bkMsg"></span>
+    </div>
+    <textarea id="bkIn" rows="3" spellcheck="false" placeholder="dán dữ liệu sao lưu vào đây…"></textarea>
+    <div class="row" style="margin-top:8px">
+      <button class="btn ghost sm" id="bkImport">Nhập và gộp vào sổ tay</button>
+    </div>
+  </details>`;
+
+  const addOne = ()=>{
+    const w = $("#aW").value.trim();
+    if(!w){ $("#aMsg").innerHTML = '<span class="pen">Cần ít nhất từ hoặc cụm từ tiếng Anh.</span>'; return; }
+    const ok = addNote({w:w, vi:$("#aVi").value.trim(), ex:$("#aEx").value.trim(), note:$("#aNote").value.trim(), tag:$("#aTag").value});
+    if(!ok){ $("#aMsg").innerHTML = '<span class="pen">“'+esc(w)+'” đã có trong sổ tay.</span>'; return; }
+    addXp(1);
+    ["aW","aVi","aEx","aNote"].forEach(id => $("#"+id).value = "");
+    $("#aMsg").innerHTML = '<span class="ok">Đã lưu.</span>';
+    $("#aW").focus();
+    VIEWS.notes();
+  };
+  $("#aAdd").onclick = addOne;
+  ["aW","aVi","aEx","aNote"].forEach(id => $("#"+id).addEventListener("keydown", e=>{ if(e.key==="Enter") addOne(); }));
+
+  $("#view").querySelectorAll("[data-nf]").forEach(b => b.onclick = ()=>{ nFilter = b.getAttribute("data-nf"); VIEWS.notes(); });
+  $("#nQ").addEventListener("input", e => { nQuery = e.target.value; paintNotes(); });
+  $("#nS").onchange = e => { nSort = e.target.value; paintNotes(); };
+  $("#nRev").onclick = ()=>{
+    const list = noteList();
+    if(!list.length){ $("#revBox").innerHTML = '<div class="empty">Chưa có mục nào để ôn. Hãy lưu vài từ trước đã.</div>'; return; }
+    rvQueue = shuffle(list); rvPos = 0; rvFlip = false; paintRev();
+  };
+
+  $("#bkOut").value = JSON.stringify(S.notes||[]);
+  $("#bkCopy").onclick = ()=>copyText($("#bkOut").value, "bkMsg");
+  $("#bkTsv").onclick = ()=>{
+    const rows = (S.notes||[]).map(n => [n.w, n.vi, n.ex, n.note, TAGS[n.tag]||n.tag, n.added].map(x=>String(x||"").replace(/\t|\n/g," ")).join("\t"));
+    copyText(["Từ/cụm\tNghĩa\tVí dụ\tGhi chú\tNhóm\tNgày thêm"].concat(rows).join("\n"), "bkMsg");
+  };
+  $("#bkImport").onclick = ()=>{
+    let data;
+    try{ data = JSON.parse($("#bkIn").value); }catch(err){ $("#bkMsg").innerHTML = '<span class="pen">Dữ liệu không đọc được. Hãy dán đúng đoạn đã sao chép.</span>'; return; }
+    if(!Array.isArray(data)){ $("#bkMsg").innerHTML = '<span class="pen">Dữ liệu không đúng định dạng.</span>'; return; }
+    let added = 0;
+    data.forEach(n => { if(n && n.w && addNote({w:n.w, ipa:n.ipa, p:n.p, vi:n.vi, ex:n.ex, exvi:n.exvi, note:n.note, tag:n.tag||"mine"})) added++; });
+    $("#bkIn").value = "";
+    VIEWS.notes();
+    $("#bkMsg").innerHTML = '<span class="ok">Đã thêm '+added+' mục mới.</span>';
+  };
+
+  if(rvQueue) paintRev();
+  paintNotes();
+  paintRail();
+};
+
+function copyText(text, msgId){
+  const done = ok => { const m = $("#"+msgId); if(m) m.innerHTML = ok ? '<span class="ok">Đã sao chép.</span>' : '<span class="pen">Trình duyệt chặn sao chép — hãy bôi đen rồi copy thủ công.</span>'; };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>done(true), ()=>done(false));
+  }else done(false);
+}
+
+function paintNotes(){
+  const host = $("#nList"); if(!host) return;
+  const list = noteList();
+  if(!list.length){
+    host.innerHTML = '<div class="empty">'+((S.notes||[]).length
+      ? 'Không có mục nào khớp với bộ lọc này.'
+      : 'Sổ tay đang trống. Đánh dấu “Đã thuộc” ở phần Từ vựng, hoặc tự thêm một mục ở trên.')+'</div>';
+    return;
+  }
+  host.innerHTML = list.map(n => nEdit === n.id ? noteEditHtml(n) : noteHtml(n)).join("");
+  host.querySelectorAll("[data-del]").forEach(b => b.onclick = ()=>{
+    if(confirm('Xoá “'+b.getAttribute("data-del-w")+'” khỏi sổ tay?')){ delNote(b.getAttribute("data-del")); VIEWS.notes(); }
+  });
+  host.querySelectorAll("[data-edit]").forEach(b => b.onclick = ()=>{ nEdit = b.getAttribute("data-edit"); paintNotes(); });
+  host.querySelectorAll("[data-cancel]").forEach(b => b.onclick = ()=>{ nEdit = null; paintNotes(); });
+  host.querySelectorAll("[data-savee]").forEach(b => b.onclick = ()=>{
+    const id = b.getAttribute("data-savee");
+    const n = (S.notes||[]).find(x => x.id === id); if(!n) return;
+    const box = b.closest(".nitem");
+    n.w = box.querySelector('[data-f="w"]').value.trim() || n.w;
+    n.vi = box.querySelector('[data-f="vi"]').value.trim();
+    n.ex = box.querySelector('[data-f="ex"]').value.trim();
+    n.note = box.querySelector('[data-f="note"]').value.trim();
+    save(); nEdit = null; paintNotes();
+  });
+}
+
+function noteHtml(n){
+  return `<div class="nitem${n.added===today()?' new':''}">
+    <div class="spread" style="align-items:flex-start">
+      <div style="min-width:0">
+        <b class="en" style="font-size:17px">${esc(n.w)}</b>
+        ${n.ipa?' <span class="ipa">'+esc(n.ipa)+'</span>':''}
+        ${n.p?' <span class="chip">'+esc(n.p)+'</span>':''}
+        ${n.vi?'<div style="font-weight:600">'+esc(n.vi)+'</div>':''}
+        ${n.ex?'<p class="en" style="margin:5px 0 0">'+esc(n.ex)+'</p>':''}
+        ${n.exvi?'<p class="small" style="margin:1px 0 0">'+esc(n.exvi)+'</p>':''}
+        ${n.note?'<p class="small" style="margin:5px 0 0">✎ '+esc(n.note)+'</p>':''}
+      </div>
+      <div class="row" style="flex-wrap:nowrap">${speakBtn(n.w, n.w)}</div>
+    </div>
+    <div class="row" style="margin-top:9px">
+      <span class="chip">${esc(TAGS[n.tag]||"Tự thêm")}</span>
+      <span class="small">${esc(n.added||"")}</span>
+      <button class="chip btn" data-edit="${n.id}">Sửa</button>
+      <button class="chip btn" data-del="${n.id}" data-del-w="${esc(n.w)}">Xoá</button>
+    </div>
+  </div>`;
+}
+
+function noteEditHtml(n){
+  return `<div class="nitem">
+    <div class="tools" style="margin-bottom:8px">
+      <input type="text" data-f="w" class="en" value="${esc(n.w)}" spellcheck="false">
+      <input type="text" data-f="vi" value="${esc(n.vi||"")}" placeholder="nghĩa tiếng Việt">
+    </div>
+    <input type="text" data-f="ex" class="en" value="${esc(n.ex||"")}" placeholder="câu ví dụ" spellcheck="false" style="margin-bottom:8px">
+    <input type="text" data-f="note" value="${esc(n.note||"")}" placeholder="ghi chú">
+    <div class="row" style="margin-top:9px">
+      <button class="btn sm" data-savee="${n.id}">Lưu thay đổi</button>
+      <button class="btn ghost sm" data-cancel="1">Huỷ</button>
+    </div>
+  </div>`;
+}
+
+function paintRev(){
+  const box = $("#revBox"); if(!box) return;
+  if(!rvQueue){ box.innerHTML = ""; return; }
+  if(rvPos >= rvQueue.length){
+    box.innerHTML = `<div class="card flash"><div>
+      <div style="font-size:18px;font-weight:700">Hết lượt ôn.</div>
+      <p class="small">Bạn vừa đi qua ${rvQueue.length} mục trong sổ tay.</p>
+      <div class="row" style="justify-content:center">
+        <button class="btn" id="rvAgain">Ôn lại lượt nữa</button>
+        <button class="btn ghost" id="rvClose">Đóng</button>
+      </div></div></div>`;
+    $("#rvAgain").onclick = ()=>{ rvQueue = shuffle(rvQueue); rvPos = 0; rvFlip = false; paintRev(); };
+    $("#rvClose").onclick = ()=>{ rvQueue = null; paintRev(); };
+    return;
+  }
+  const n = rvQueue[rvPos];
+  box.innerHTML = `<div class="card flash" style="min-height:190px"><div>
+      <div class="word en" style="font-size:31px">${esc(n.w)}</div>
+      <div class="row" style="justify-content:center;margin-top:8px">${speakBtn(n.w, n.w)}</div>
+      ${rvFlip ? `<div class="vi">${esc(n.vi||"(chưa ghi nghĩa)")}</div>
+        ${n.ex?'<p class="ex en">'+esc(n.ex)+'</p>':''}
+        ${n.note?'<p class="small" style="margin:6px 0 0">✎ '+esc(n.note)+'</p>':''}` : ''}
+    </div></div>
+    <div class="spread" style="margin-top:10px">
+      <span class="small">Ôn ${rvPos+1}/${rvQueue.length}</span>
+      <div class="row">
+        <button class="btn ghost sm" id="rvStop">Dừng</button>
+        ${rvFlip ? '<button class="btn sm" id="rvNext">Mục tiếp theo</button>' : '<button class="btn sm" id="rvFlip">Xem nghĩa</button>'}
+      </div>
+    </div>`;
+  $("#rvStop").onclick = ()=>{ rvQueue = null; paintRev(); };
+  if(rvFlip) $("#rvNext").onclick = ()=>{ rvPos++; rvFlip = false; paintRev(); };
+  else $("#rvFlip").onclick = ()=>{ rvFlip = true; paintRev(); };
+}
+
+/* =========================================================
+   MÀN HÌNH: NGỮ PHÁP
+   ========================================================= */
+VIEWS.grammar = function(){
+  $("#view").innerHTML = `
+  <h1>Ngữ pháp B2</h1>
+  <p class="lede">Mười một chủ điểm hay ra nhất ở trình độ B2. Mỗi bài có giải thích ngắn, bảng so sánh và bốn câu tự kiểm.</p>
+  <div class="tlist">${GRAMMAR.map((g,i)=>
+    `<button class="titem" data-g="${i}"><div class="spread"><div><b>${esc(g.t)}</b><span>${esc(g.sub)}</span></div>
+     ${S.grammarDone[g.id]?'<span class="chip on">đã làm</span>':''}</div></button>`).join("")}</div>`;
+};
+function grammarDetail(i){
+  const g = GRAMMAR[i];
+  $("#view").innerHTML = `
+  <button class="btn ghost sm" data-go="grammar">← Tất cả chủ điểm</button>
+  <h1 style="margin-top:16px">${esc(g.t)}</h1>
+  <p class="lede">${esc(g.sub)}</p>
+  <div class="card">${g.html}</div>
+  <h2>Tự kiểm</h2>
+  <p class="small" style="margin-top:-4px">Điền dạng đúng của từ trong ngoặc.</p>
+  <div id="gex">${g.ex.map((x,j)=>
+    `<div class="exbox">
+      <div class="q en">${j+1}. ${esc(x.q)}</div>
+      <input type="text" data-i="${j}" autocomplete="off" spellcheck="false" placeholder="câu trả lời của bạn">
+      <div class="fb" data-fb="${j}"></div>
+    </div>`).join("")}</div>
+  <div class="row" style="margin-top:14px">
+    <button class="btn" id="gCheck">Kiểm tra</button>
+    <button class="btn ghost" id="gShow">Xem đáp án</button>
+  </div>`;
+  const check = reveal => {
+    let right = 0;
+    g.ex.forEach((x,j)=>{
+      const inp = $('#gex input[data-i="'+j+'"]');
+      const fb = $('#gex [data-fb="'+j+'"]');
+      const val = norm(inp.value);
+      const good = x.a.some(a=>norm(a)===val);
+      if(good){ right++; fb.innerHTML = '<span class="ok">✓ Chính xác.</span>'; }
+      else if(reveal){ fb.innerHTML = '<span class="pen">Đáp án: '+x.a.map(esc).join(" / ")+'</span>'+(x.hint?' <span class="small">'+esc(x.hint)+'</span>':''); }
+      else { fb.innerHTML = '<span class="pen">✕ Chưa đúng — thử lại.</span>'+(x.hint?' <span class="small">'+esc(x.hint)+'</span>':''); }
+    });
+    if(right === g.ex.length && !S.grammarDone[g.id]){ S.grammarDone[g.id]=1; addXp(10); }
+    return right;
+  };
+  $("#gCheck").onclick = ()=>check(false);
+  $("#gShow").onclick = ()=>check(true);
+}
+
+/* =========================================================
+   MÀN HÌNH: LUYỆN TẬP (TRẮC NGHIỆM)
+   ========================================================= */
+let qSet = [], qPos = 0, qScore = 0, qLocked = false;
+VIEWS.quiz = function(){
+  qSet = shuffle(QUIZ).slice(0,10); qPos = 0; qScore = 0; qLocked = false;
+  $("#view").innerHTML = `
+  <h1>Luyện tập</h1>
+  <p class="lede">Mười câu lấy ngẫu nhiên từ ngân hàng ${QUIZ.length} câu ngữ pháp và từ vựng. Sai câu nào có giải thích ngay câu đó.</p>
+  <div class="bar" style="margin-bottom:16px"><i id="qBar" style="width:0%"></i></div>
+  <div id="qHost"></div>`;
+  paintQ();
+};
+function paintQ(){
+  const host = $("#qHost");
+  $("#qBar").style.width = (qPos/10*100)+"%";
+  if(qPos >= qSet.length){
+    if(qScore > (S.quizBest||0)) S.quizBest = qScore;
+    S.quizRuns = (S.quizRuns||0)+1; addXp(qScore*3);
+    const msg = qScore>=9 ? "Rất chắc. Thử chuyển sang phần đọc hiểu."
+      : qScore>=7 ? "Ổn định ở mức B2. Ôn lại các câu vừa sai."
+      : qScore>=5 ? "Nền tảng có rồi, còn thiếu độ chính xác. Quay lại phần ngữ pháp."
+      : "Nên ôn kỹ phần ngữ pháp trước khi làm lại.";
+    host.innerHTML = `<div class="card stack">
+      <div style="font-size:40px;font-weight:800;letter-spacing:-.03em">${qScore}<span style="font-size:20px;color:var(--muted)">/10</span></div>
+      <p>${msg}</p>
+      <div class="row"><button class="btn" id="qAgain">Làm bộ 10 câu khác</button>
+      <button class="btn ghost" data-go="grammar">Ôn ngữ pháp</button></div></div>`;
+    $("#qAgain").onclick = ()=>VIEWS.quiz();
+    paintRail(); return;
+  }
+  const it = qSet[qPos];
+  host.innerHTML = `
+  <div class="card">
+    <div class="small">Câu ${qPos+1} / 10</div>
+    <div class="q en" style="font-size:18px;margin:6px 0 12px">${esc(it.q)}</div>
+    ${it.o.map((o,k)=>'<button class="opt en" data-k="'+k+'">'+esc(o)+'</button>').join("")}
+    <div class="fb" id="qFb"></div>
+  </div>
+  <div class="row" style="margin-top:12px"><button class="btn" id="qNext" disabled>Câu tiếp theo</button></div>`;
+  qLocked = false;
+  host.querySelectorAll(".opt").forEach(btn=>{
+    btn.onclick = ()=>{
+      if(qLocked) return; qLocked = true;
+      const k = +btn.getAttribute("data-k");
+      host.querySelectorAll(".opt").forEach((b,j)=>{ if(j===it.c) b.classList.add("right"); });
+      if(k===it.c){ qScore++; $("#qFb").innerHTML = '<span class="ok">✓ Đúng.</span> '+esc(it.e); }
+      else { btn.classList.add("wrong"); $("#qFb").innerHTML = '<span class="pen">✕ Chưa đúng.</span> '+esc(it.e); }
+      $("#qNext").disabled = false;
+    };
+  });
+  $("#qNext").onclick = ()=>{ qPos++; paintQ(); };
+}
+
+/* =========================================================
+   MÀN HÌNH: ĐỌC HIỂU
+   ========================================================= */
+VIEWS.reading = function(){
+  $("#view").innerHTML = `
+  <h1>Đọc hiểu</h1>
+  <p class="lede">Ba bài đọc viết riêng cho trình độ B2, độ dài gần với đề thi. Đọc hết một lượt trước, đừng tra từ giữa chừng.</p>
+  <div class="tlist">${READING.map((r,i)=>
+    `<button class="titem" data-r="${i}"><div class="spread"><div><b class="en">${esc(r.t)}</b><span>${esc(r.sub)}</span></div>
+    ${S.readDone[r.id]?'<span class="chip on">'+S.readDone[r.id]+'/5</span>':''}</div></button>`).join("")}</div>`;
+};
+function readDetail(i){
+  const r = READING[i];
+  const plain = r.body.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+  $("#view").innerHTML = `
+  <button class="btn ghost sm" data-go="reading">← Tất cả bài đọc</button>
+  <div class="spread" style="margin-top:16px">
+    <h1 class="en" style="margin:0">${esc(r.t)}</h1>
+    ${speakBtn(plain.slice(0,900), "bài đọc")}
+  </div>
+  <p class="lede">${esc(r.sub)}</p>
+  <div class="passage">${r.body}</div>
+  <h2>Câu hỏi</h2>
+  <div id="rq">${r.q.map((x,j)=>
+    `<div class="exbox" data-qi="${j}">
+      <div class="q en">${j+1}. ${esc(x.q)}</div>
+      ${x.o.map((o,k)=>'<button class="opt en" data-qi="'+j+'" data-k="'+k+'">'+esc(o)+'</button>').join("")}
+      <div class="fb" data-fb="${j}"></div>
+    </div>`).join("")}</div>
+  <h2>Bảng từ</h2>
+  <div class="card"><table class="gtab">${r.gloss.map(g=>'<tr><td class="en">'+esc(g[0])+'</td><td>'+esc(g[1])+'</td></tr>').join("")}</table></div>`;
+  const answered = {};
+  $("#rq").addEventListener("click", e=>{
+    const b = e.target.closest(".opt"); if(!b) return;
+    const j = +b.getAttribute("data-qi"), k = +b.getAttribute("data-k");
+    if(answered[j]) return; answered[j] = true;
+    const x = r.q[j], box = $('#rq [data-qi="'+j+'"]');
+    box.querySelectorAll(".opt").forEach((o,m)=>{ if(m===x.c) o.classList.add("right"); });
+    const fb = $('#rq [data-fb="'+j+'"]');
+    if(k===x.c){ fb.innerHTML = '<span class="ok">✓ Đúng.</span> '+esc(x.e); }
+    else { b.classList.add("wrong"); fb.innerHTML = '<span class="pen">✕ Chưa đúng.</span> '+esc(x.e); }
+    const done = Object.keys(answered).length;
+    if(done === r.q.length){
+      let score = 0;
+      $("#rq").querySelectorAll(".fb").forEach(f=>{ if(f.textContent.indexOf("✓")===0) score++; });
+      S.readDone[r.id] = score; addXp(score*2); paintRail();
+    }
+  });
+}
+
+/* =========================================================
+   MÀN HÌNH: NGHE & CHÉP CHÍNH TẢ
+   ========================================================= */
+let dPos = 0, dRate = 0.85;
+VIEWS.listen = function(){
+  const supported = "speechSynthesis" in window;
+  $("#view").innerHTML = `
+  <h1>Nghe & chép chính tả</h1>
+  <p class="lede">Nghe câu, gõ lại chính xác từng từ. Những chỗ sai sẽ được gạch chân đỏ để bạn thấy mình nghe hụt ở đâu.</p>
+  ${supported ? "" : '<div class="note" style="margin-bottom:14px">Trình duyệt này không đọc được tiếng Anh. Bạn vẫn có thể đọc câu gốc ở nút “Xem câu gốc”.</div>'}
+  <div class="row" style="margin-bottom:14px">
+    <span class="small">Tốc độ đọc</span>
+    ${[["0.7","chậm"],["0.85","vừa"],["1","tự nhiên"]].map(r=>'<button class="chip btn '+(String(dRate)===r[0]?'on':'')+'" data-rate="'+r[0]+'">'+r[1]+'</button>').join("")}
+  </div>
+  <div id="dHost"></div>`;
+  paintD();
+};
+function diffWords(target, typed){
+  const T = norm(target).split(" "), U = norm(typed).split(" ").filter(Boolean);
+  const n=T.length, m=U.length, dp=[];
+  for(let a=0;a<=n;a++){ dp.push(new Array(m+1).fill(0)); }
+  for(let a=n-1;a>=0;a--) for(let b=m-1;b>=0;b--)
+    dp[a][b] = T[a]===U[b] ? dp[a+1][b+1]+1 : Math.max(dp[a+1][b], dp[a][b+1]);
+  const match = new Array(n).fill(false);
+  let a=0,b=0;
+  while(a<n && b<m){
+    if(T[a]===U[b]){ match[a]=true; a++; b++; }
+    else if(dp[a+1][b] >= dp[a][b+1]) a++;
+    else b++;
+  }
+  const words = target.split(/\s+/);
+  let hit = 0;
+  const html = words.map((w,k)=>{
+    const good = match[k];
+    if(good) hit++;
+    return '<span class="diffw'+(good?'':' bad')+'">'+esc(w)+'</span>';
+  }).join(" ");
+  return {html, hit, total:n};
+}
+function paintD(){
+  const host = $("#dHost");
+  const s = DICTATION[dPos];
+  host.innerHTML = `
+  <div class="card stack">
+    <div class="spread">
+      <span class="small">Câu ${dPos+1} / ${DICTATION.length}</span>
+      <div class="row">
+        <button class="btn sm" id="dPlay">▶ Nghe</button>
+        <button class="btn ghost sm" id="dShow">Xem câu gốc</button>
+      </div>
+    </div>
+    <textarea id="dIn" rows="3" placeholder="Gõ lại câu bạn nghe được…" spellcheck="false"></textarea>
+    <div class="row">
+      <button class="btn" id="dCheck">Kiểm tra</button>
+      <button class="btn ghost" id="dNext">Câu tiếp theo</button>
+    </div>
+    <div id="dFb"></div>
+  </div>`;
+  const play = ()=>{ if(!say(s, dRate)) $("#dFb").innerHTML='<span class="pen">Trình duyệt không hỗ trợ đọc tiếng Anh.</span>'; };
+  $("#dPlay").onclick = play;
+  $("#dShow").onclick = ()=>{ $("#dFb").innerHTML = '<p class="en" style="font-size:17px">'+esc(s)+'</p>'; };
+  $("#dCheck").onclick = ()=>{
+    const r = diffWords(s, $("#dIn").value);
+    const perfect = r.hit === r.total;
+    if(perfect && !S.dictDone[dPos]){ S.dictDone[dPos]=1; addXp(5); }
+    $("#dFb").innerHTML = '<div class="small" style="margin-bottom:4px">Đúng '+r.hit+'/'+r.total+' từ</div>'+
+      '<p class="en" style="font-size:17.5px;margin:0">'+r.html+'</p>'+
+      (perfect ? '<p class="ok" style="margin:6px 0 0">Chính xác từng từ.</p>' : '<p class="small" style="margin:6px 0 0">Những từ gạch đỏ là chỗ bạn nghe hụt hoặc gõ khác. Nghe lại chậm rồi thử lần nữa.</p>');
+    paintRail();
+  };
+  $("#dNext").onclick = ()=>{ dPos = (dPos+1)%DICTATION.length; paintD(); };
+  setTimeout(play, 350);
+}
+
+/* =========================================================
+   MÀN HÌNH: VIẾT
+   ========================================================= */
+VIEWS.write = function(){
+  $("#view").innerHTML = `
+  <h1>Viết</h1>
+  <p class="lede">Bốn dạng bài viết thường gặp ở B2. Bản nháp được lưu trong trình duyệt của bạn, không gửi đi đâu cả.</p>
+  <div class="tlist">${WRITING.map((w,i)=>
+    `<button class="titem" data-w="${i}"><div class="spread"><div><b>${esc(w.t)}</b><span>${esc(w.target)}${S.essays[w.id]?' · có bản nháp':''}</span></div></div></button>`).join("")}</div>`;
+};
+function writeDetail(i){
+  const w = WRITING[i];
+  $("#view").innerHTML = `
+  <button class="btn ghost sm" data-go="write">← Tất cả đề</button>
+  <h1 style="margin-top:16px">${esc(w.t)}</h1>
+  <p class="lede">Độ dài mục tiêu ${esc(w.target)}</p>
+  <div class="card"><p class="en" style="font-size:17px;margin:0">${esc(w.prompt)}</p></div>
+  <h2>Dàn ý gợi ý</h2>
+  <ol style="padding-left:20px">${w.struct.map(s=>'<li style="margin-bottom:5px">'+esc(s)+'</li>').join("")}</ol>
+  <h2>Mẫu câu dùng được</h2>
+  <div class="card"><ul class="en" style="padding-left:20px;margin:0">${w.phrases.map(p=>'<li style="margin-bottom:5px">'+esc(p)+'</li>').join("")}</ul></div>
+  <h2>Bản nháp</h2>
+  <textarea id="wIn" class="ruled" spellcheck="false" placeholder="Viết ở đây…"></textarea>
+  <div class="spread" style="margin-top:8px">
+    <span class="small" id="wCount">0 từ</span>
+    <div class="row">
+      <button class="btn ghost sm" id="wClear">Xoá bản nháp</button>
+      <span class="small" id="wSaved"></span>
+    </div>
+  </div>
+  <h2>Tự kiểm trước khi nộp</h2>
+  <div class="card"><ul style="padding-left:20px;margin:0">
+    <li>Đã trả lời <b>đủ mọi phần</b> của đề chưa?</li>
+    <li>Mỗi đoạn có <b>một ý chính</b> rõ ràng và câu chủ đề không?</li>
+    <li>Có ít nhất ba từ nối khác nhau, không lặp <span class="en">and / but / so</span>?</li>
+    <li>Có dùng ít nhất hai cấu trúc B2 (bị động, mệnh đề quan hệ, câu điều kiện, đảo ngữ)?</li>
+    <li>Đã soát lỗi chia thì, số ít/số nhiều, mạo từ <span class="en">a / an / the</span> chưa?</li>
+    <li>Giọng văn có nhất quán (trang trọng hay thân mật) suốt bài không?</li>
+  </ul></div>`;
+  const ta = $("#wIn"), cnt = $("#wCount"), saved = $("#wSaved");
+  ta.value = (S.essays && S.essays[w.id]) || "";
+  const count = ()=>{
+    const n = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+    const [lo,hi] = w.target.replace(/[^\d–-]/g,"").split(/[–-]/).map(Number);
+    let note = "";
+    if(n && lo && n < lo) note = " · còn thiếu "+(lo-n)+" từ";
+    else if(n && hi && n > hi) note = " · dài hơn mục tiêu "+(n-hi)+" từ";
+    else if(n) note = " · trong khoảng mục tiêu";
+    cnt.textContent = n+" từ"+note;
+  };
+  let t;
+  ta.addEventListener("input", ()=>{
+    count();
+    clearTimeout(t);
+    t = setTimeout(()=>{ S.essays[w.id] = ta.value; save(); saved.textContent = "đã lưu"; setTimeout(()=>saved.textContent="",1500); }, 600);
+  });
+  $("#wClear").onclick = ()=>{ ta.value=""; delete S.essays[w.id]; save(); count(); };
+  count();
+}
+
+/* =========================================================
+   KHỞI ĐỘNG
+   ========================================================= */
+load();
+if(S.theme) document.documentElement.setAttribute("data-theme", S.theme);
+$("#themeBtn").onclick = ()=>{
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const next = dark ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  S.theme = next; save();
+};
+$("#resetBtn").onclick = ()=>{
+  if(!confirm("Xoá toàn bộ tiến độ, thẻ đã thuộc và bản nháp trên thiết bị này?")) return;
+  S = Object.assign({}, DEF); save(); go("home");
+};
+paintNav(); paintRail(); go("home");
+</script>
+</body>
+</html>
